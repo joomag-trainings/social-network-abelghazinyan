@@ -1,13 +1,13 @@
 <?php
 
+    include '../Classes/Authentication.php';
+
     if ($_SERVER['REQUEST_METHOD']==='GET') {
         if (isset($_GET)) {
             if (!empty($_GET['logout']) && $_GET['logout'] === 'LogOut') {
-                unset($_COOKIE['user']);
-                unset($_COOKIE['pswd']);
-                setcookie('user', null, 1);
-                setcookie('pswd', null, 1);
+                Authentication::forgetUser();
                 header('Location:login.php');
+
                 exit;
             }
         }
@@ -17,9 +17,6 @@
     $imageError = '';
     if ($_SERVER['REQUEST_METHOD']==='POST') {
         if ($_POST['form'] === 'profile') {
-            echo "<pre>";
-            var_dump($_FILES);
-            echo "</pre>";
             $target_dir = "/var/www/html/social-network/Profile/";
             $target_file = $target_dir . basename($_FILES["file"]["name"]);
             echo $target_file;

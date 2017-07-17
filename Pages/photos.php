@@ -1,12 +1,13 @@
 <?php
+
+    include '../Classes/Authentication.php';
+
     if ($_SERVER['REQUEST_METHOD']==='GET') {
         if (isset($_GET)) {
             if (!empty($_GET['logout']) && $_GET['logout'] === 'LogOut') {
-                unset($_COOKIE['user']);
-                unset($_COOKIE['pswd']);
-                setcookie('user', null, 1);
-                setcookie('pswd', null, 1);
+                Authentication::forgetUser();
                 header('Location:login.php');
+
                 exit;
             }
         }
