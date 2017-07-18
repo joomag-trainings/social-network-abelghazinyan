@@ -1,19 +1,16 @@
 <?php
 
-    spl_autoload_register(function ($classname) {
-        include_once $classname . '.php';
-    });
+    namespace Controller;
 
     class Registration
     {
         private $signUpErr;
         private $firstName,$lastName,$emailSignUp,$pswdNew,$gender;
-        private $formName;
-        public function __construct($formName)
+        private static $formName = 'signUp';
+        public function __construct()
         {
             $this->signUpErr = '';
             $this->firstName = $this->lastName = $this->emailSignUp = $this->pswdNew = $this->gender = '';
-            $this->formName = $formName;
         }
 
         public function verifyForm()
@@ -21,7 +18,7 @@
             $errCount = 0;
             $request = false;
             if ($_SERVER['REQUEST_METHOD']==='POST') {
-                if ($_POST['form'] == $this->formName) {
+                if ($_POST['form'] == self::$formName) {
                     $request = true;
                     if (empty($_POST['fname'])) {
                         if ($errCount === 0) {

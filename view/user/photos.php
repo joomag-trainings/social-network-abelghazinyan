@@ -1,11 +1,11 @@
 <?php
 
-    include '../Classes/Authentication.php';
+    include '../Class/AuthenticationController.phproller.php';
 
     if ($_SERVER['REQUEST_METHOD']==='GET') {
         if (isset($_GET)) {
             if (!empty($_GET['logout']) && $_GET['logout'] === 'LogOut') {
-                Authentication::forgetUser();
+                AuthenticationController::forgetUser();
                 header('Location:login.php');
 
                 exit;
@@ -20,10 +20,10 @@
     <title>Photos</title>
     <link rel = "stylesheet"
           type = "text/css"
-          href = "../Styles/PhotosStyle.css" />
+          href = "../../Styles/PhotosStyle.css" />
     <link rel = "stylesheet"
           type = "text/css"
-          href = "../Styles/HeaderStyle.css" />
+          href = "../../Styles/HeaderStyle.css" />
 </head>
 <body>
 <div class="header">
@@ -40,25 +40,25 @@
     <h1>Photos</h1>
     <br>
     <div class="pic">
-        <img src="../Assets/1.jpg">
+        <img src="../../Assets/1.jpg">
     </div>
     <div class="pic">
-        <img src="../Assets/2.jpg">
+        <img src="../../Assets/2.jpg">
     </div>
     <div class="pic">
-        <img src="../Assets/3.jpg">
+        <img src="../../Assets/3.jpg">
     </div>
     <div class="pic">
-        <img src="../Assets/4.jpg">
+        <img src="../../Assets/4.jpg">
     </div>
     <div class="pic">
-        <img src="../Assets/5.jpg">
+        <img src="../../Assets/5.jpg">
     </div>
     <div class="pic">
-        <img src="../Assets/6.jpg">
+        <img src="../../Assets/6.jpg">
     </div>
     <div class="pic">
-        <img src="../Assets/7.jpg">
+        <img src="../../Assets/7.jpg">
     </div>
 </div>
 </body>

@@ -21,22 +21,41 @@
     font-size:20px;
     font-family: "DejaVu Sans";
     text-align: center;
-
+    padding-top: 10px;
     text-decoration: solid;
 
 
 }
 
-.logout {
+.logout:link {
     float:right;
     border-radius: 3px;
+    text-decoration: solid;
+    text-align: center;
     font-family: "DejaVu Sans";
     background-color: #3498db;
     color:antiquewhite;
-    padding: 3px;
+    padding-top: 10px;
     font-size:15px;
     width:100px;
-    height: 40px;
+    height: 30px;
+    margin-top:5px;
+    margin-right: 50px;
+    border:0px;
+}
+
+.logout:visited {
+    float:right;
+    border-radius: 3px;
+    text-decoration: solid;
+    text-align: center;
+    font-family: "DejaVu Sans";
+    background-color: #3498db;
+    color:antiquewhite;
+    padding-top: 10px;
+    font-size:15px;
+    width:100px;
+    height: 30px;
     margin-top:5px;
     margin-right: 50px;
     border:0px;

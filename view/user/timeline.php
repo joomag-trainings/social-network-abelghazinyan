@@ -1,11 +1,11 @@
 <?php
 
-    include '../Classes/Authentication.php';
+    include '../Class/AuthenticationControllerController.php';
 
     if ($_SERVER['REQUEST_METHOD']==='GET') {
         if (isset($_GET)) {
             if (!empty($_GET['logout']) && $_GET['logout'] === 'LogOut') {
-                Authentication::forgetUser();
+                AuthenticationController::forgetUser();
                 header('Location:login.php');
 
                 exit;
@@ -20,10 +20,10 @@
     <title>Timeline</title>
     <link rel = "stylesheet"
           type = "text/css"
-          href = "../Styles/TimelineStyle.css" />
+          href = "../../Styles/TimelineStyle.css" />
     <link rel = "stylesheet"
           type = "text/css"
-          href = "../Styles/HeaderStyle.css" />
+          href = "../../Styles/HeaderStyle.css" />
 </head>
 <body>
 <div class="header">
@@ -39,14 +39,14 @@
 <div class="body">
     <div class="owner">
         <div class="profile">
-            <img src="../Profile/profile.jpg">
+            <img src="../../Profile/profile.jpg">
 
         </div>
         <h3>Abel Ghazinyan</h3>
         <i>02/07/2017</i>
     </div>
     <div class="post">
-        <img src="../Assets/post.jpg">
+        <img src="../../Assets/post.jpg">
     </div>
 
     <div class="likeandshare">

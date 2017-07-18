@@ -1,42 +1,58 @@
 <?php
 
-    spl_autoload_register(function ($classname) {
-        include_once $classname . '.php';
-    });
+    namespace Controller;
 
-    class Authentication
+    class AuthenticationController
     {
         private $emailErr, $emailSignIn, $passwordErr, $passwordSignIn;
-        private $formUser, $formPassword, $formName;
+        private static  $formUser = 'email', $formPassword = 'password', $formName = 'signIn';
         private $dataBase;
+        private $signUp;
 
-        public function __construct($formUser, $formPassword, $formName)
+        public function __construct()
         {
-            $this->formUser = $formUser;
-            $this->formPassword = $formPassword;
-            $this->formName = $formName;
             $this->emailErr = $this->emailSignIn = $this->passwordErr = $this->passwordSignIn = '';
             $this->dataBase = new DataBase();
             $this->dataBase->readDataBase();
+            $this->signUp = new Registration();
+        }
+
+        public function actionShow ()
+        {
+            if ($this->checkIfRemembered()) {
+                header("Location:../view/user/profile.php");
+            } elseif ($this->readInputs()) {
+                if ($this->verifyUser()) {
+                    $this->actionLogin();
+                    header("Location:../view/user/profile.php");
+                }
+            }
+
+            if ($this->signUp->verifyForm()) {
+                $this->signUp->registerUser();
+            }
+
+            require '../view/login.php';
+
         }
 
         public function readInputs()
         {
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                if ($_POST['form'] == $this->formName) {
-                    if (empty($_POST[$this->formUser])) {
+                if ($_POST['form'] == self::$formName) {
+                    if (empty($_POST[self::$formUser])) {
                         $this->emailErr = 'Email is required';
                     } else {
-                        if (!Validation::validateEmail($_POST[$this->formUser])) {
+                        if (!Validation::validateEmail($_POST[self::$formUser])) {
                             $this->emailErr = "Invalid email format";
                         } else {
-                            $this->emailSignIn = Validation::cleanData($_POST[$this->formUser]);
+                            $this->emailSignIn = Validation::cleanData($_POST[self::$formUser]);
                         }
                     }
-                    if (empty($_POST[$this->formPassword])) {
+                    if (empty($_POST[self::$formPassword])) {
                         $this->passwordErr = 'Password is required';
                     } else {
-                        $this->passwordSignIn = Validation::cleanData($_POST[$this->formPassword]);
+                        $this->passwordSignIn = Validation::cleanData($_POST[self::$formPassword]);
                     }
                 }
             }
@@ -52,7 +68,7 @@
         {
             $logIn = false;
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                if ($_POST['form'] == $this->formName) {
+                if ($_POST['form'] == self::$formName) {
                     if ($this->emailErr === '' && $this->passwordErr === '') {
                         if ($this->dataBase->validUser($this->emailSignIn)) {
                             if (password_verify($this->passwordSignIn, $this->dataBase->getHash($this->emailSignIn))) {
@@ -70,15 +86,16 @@
             return $logIn;
         }
 
-        public function rememberUser()
+        public function actionLogin()
         {
             setcookie('user', $this->emailSignIn);
         }
 
-        static public function forgetUser()
+        public function actionLogout()
         {
             unset($_COOKIE['user']);
             setcookie('user', null, 1);
+            header("Location:../public/index.php?page=authentication&action=show");
         }
 
         public function checkIfRemembered()
@@ -95,8 +112,6 @@
                 if ($this->dataBase->validUser($user)) {
 
                     $login = true;
-                } else {
-                    $this->forgetUser();
                 }
 
             }

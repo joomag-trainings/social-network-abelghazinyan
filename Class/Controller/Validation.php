@@ -1,5 +1,7 @@
 <?php
 
+    namespace Controller;
+
     class Validation
     {
         static public function cleanData($data)

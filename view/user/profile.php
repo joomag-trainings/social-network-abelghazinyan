@@ -1,28 +1,13 @@
-<?php
-
-    include '../Classes/Authentication.php';
-
-    if ($_SERVER['REQUEST_METHOD']==='GET') {
-        if (isset($_GET)) {
-            if (!empty($_GET['logout']) && $_GET['logout'] === 'LogOut') {
-                Authentication::forgetUser();
-                header('Location:login.php');
-
-                exit;
-            }
-        }
-    }
-    ?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Profile</title>
     <link rel = "stylesheet"
           type = "text/css"
-          href = "../Styles/ProfileStyle.css" />
+          href = "../../Styles/ProfileStyle.css" />
     <link rel = "stylesheet"
           type = "text/css"
-          href = "../Styles/HeaderStyle.css" />
+          href = "../../Styles/HeaderStyle.css" />
 </head>
 <body>
     <div class="header">
@@ -31,15 +16,13 @@
             <a class="navButton" href="photos.php">Photos</a>
             <a class="navButton" href="profile.php">Profile</a>
         </div>
-        <form method="get">
-            <input class="logout" name="logout" type="submit" value="LogOut">
-        </form>
+        <a class="logout" href="../../public/index.php?page=authentication&action=logout">Logout</a>
     </div>
     <div class="body">
         <div class="cover">
-            <img src="../Assets/cover.png">
+            <img src="../../Assets/cover.png">
             <div class="profile">
-                <img src="../Profile/profile.jpg">
+                <img src="../../Profile/profile.jpg">
             </div>
         </div>
         <h2>Abel Ghazinyan</h2>

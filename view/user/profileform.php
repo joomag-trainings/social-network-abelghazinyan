@@ -1,11 +1,11 @@
 <?php
 
-    include '../Classes/Authentication.php';
+    include '../Class/AuthenticationController.phproller.php';
 
     if ($_SERVER['REQUEST_METHOD']==='GET') {
         if (isset($_GET)) {
             if (!empty($_GET['logout']) && $_GET['logout'] === 'LogOut') {
-                Authentication::forgetUser();
+                AuthenticationController::forgetUser();
                 header('Location:login.php');
 
                 exit;
@@ -75,10 +75,10 @@
     <title>Edit Profile</title>
     <link rel = "stylesheet"
           type = "text/css"
-          href = "../Styles/ProfileFormStyle.css" />
+          href = "../../Styles/ProfileFormStyle.css" />
     <link rel = "stylesheet"
           type = "text/css"
-          href = "../Styles/HeaderStyle.css" />
+          href = "../../Styles/HeaderStyle.css" />
 </head>
 <body>
 <div class="header">
@@ -94,7 +94,7 @@
 <div class="body">
 
     <div class="profile">
-        <img src="../Profile/profile.jpg">
+        <img src="../../Profile/profile.jpg">
     </div>
     <div class="edit">
         <form method="post" enctype="multipart/form-data">
