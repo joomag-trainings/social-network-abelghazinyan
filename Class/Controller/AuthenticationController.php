@@ -20,11 +20,11 @@
         public function actionShow ()
         {
             if ($this->checkIfRemembered()) {
-                header("Location:../view/user/profile.php");
+                header("Location:../public/index.php?page=user&action=profile");
             } elseif ($this->readInputs()) {
                 if ($this->verifyUser()) {
                     $this->actionLogin();
-                    header("Location:../view/user/profile.php");
+                    header("Location:../public/index.php?page=user&action=profile");
                 }
             }
 

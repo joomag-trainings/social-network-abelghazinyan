@@ -1,100 +1,20 @@
-<?php
-
-    include '../Class/AuthenticationController.phproller.php';
-
-    if ($_SERVER['REQUEST_METHOD']==='GET') {
-        if (isset($_GET)) {
-            if (!empty($_GET['logout']) && $_GET['logout'] === 'LogOut') {
-                AuthenticationController::forgetUser();
-                header('Location:login.php');
-
-                exit;
-            }
-        }
-    }
-
-
-    $imageError = '';
-    if ($_SERVER['REQUEST_METHOD']==='POST') {
-        if ($_POST['form'] === 'profile') {
-            $target_dir = "/var/www/html/social-network/Profile/";
-            $target_file = $target_dir . basename($_FILES["file"]["name"]);
-            echo $target_file;
-            $uploadOk = 1;
-            $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
-// Check if image file is a actual image or fake image
-            if(isset($_POST["submit"])) {
-                $check = getimagesize($_FILES["file"]["tmp_name"]);
-                if($check !== false) {
-                    $uploadOk = 1;
-                } else {
-                    $imageError = "File is not an image.";
-                    $uploadOk = 0;
-                }
-            }
-
-            if (file_exists($target_file)) {
-                $uploadOk = 0;
-            }
-
-            if ($_FILES["file"]["size"] > 500000) {
-                $imageError = "Sorry, your file is too large.";
-                $uploadOk = 0;
-            }
-
-            if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-                && $imageFileType != "gif" ) {
-                $imageError = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-                $uploadOk = 0;
-            }
-          //  rename("/var/www/html/social-network/Profile/profile.jpg","/var/www/html/social-network/Profile/profileOld.jpg");
-
-            if ($uploadOk == 0) {
-                $imageError = "Sorry, your file was not uploaded.";
-
-            } else {
-
-                if (!move_uploaded_file($_FILES["file"]["tmp_name"], $target_file)) {
-                   // rename("/var/www/html/social-network/Profile/profile.jpg","/var/www/html/social-network/Profile/profile.jpg");
-                    $imageError = "Sorry, there was an error uploading your file.";
-                }else {
-                   // $name = "Profile/" . basename($_FILES["file"]["name"]);
-                   // rename($name,"/var/www/html/social-network/Profile/profile.jpg");
-                }
-
-            }
-        }
-    }
-
-
-
-    ?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Edit Profile</title>
     <link rel = "stylesheet"
           type = "text/css"
-          href = "../../Styles/ProfileFormStyle.css" />
+          href = "../Styles/ProfileFormStyle.css" />
     <link rel = "stylesheet"
           type = "text/css"
-          href = "../../Styles/HeaderStyle.css" />
+          href = "../Styles/HeaderStyle.css" />
 </head>
 <body>
-<div class="header">
-    <div class="nav">
-        <a class="navButton" href="timeline.php">Timeline</a>
-        <a class="navButton" href="photos.php">Photos</a>
-        <a class="navButton" href="profile.php">Profile</a>
-    </div>
-    <form method="get">
-        <input class="logout" name="logout" type="submit" value="LogOut">
-    </form>
-</div>
+<?php require "../view/templates/header.php"?>
 <div class="body">
 
     <div class="profile">
-        <img src="../../Profile/profile.jpg">
+        <img src="../Profile/profile.jpg">
     </div>
     <div class="edit">
         <form method="post" enctype="multipart/form-data">
@@ -102,7 +22,7 @@
             <input type="file" name="file" id="file">
             <input type="submit" value="Upload">
         </form>
-        <span style="color:crimson;font-size: 15px;"><?php echo $imageError;?></span>
+        <span style="color:crimson;font-size: 15px;"><?php echo $uploader->getImageError();?></span>
     <form method="post"><br><br><br><br><br>
         <input type="hidden" name="form" value="form">
         <label for="fname">First Name</label> <input type="text" name="fname" id="fname" value="Abel"><br><br>

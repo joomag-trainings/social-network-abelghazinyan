@@ -4,28 +4,22 @@
     <title>Profile</title>
     <link rel = "stylesheet"
           type = "text/css"
-          href = "../../Styles/ProfileStyle.css" />
+          href = "../Styles/ProfileStyle.css" />
     <link rel = "stylesheet"
           type = "text/css"
-          href = "../../Styles/HeaderStyle.css" />
+          href = "../Styles/HeaderStyle.css" />
 </head>
 <body>
-    <div class="header">
-        <div class="nav">
-            <a class="navButton" href="timeline.php">Timeline</a>
-            <a class="navButton" href="photos.php">Photos</a>
-            <a class="navButton" href="profile.php">Profile</a>
-        </div>
-        <a class="logout" href="../../public/index.php?page=authentication&action=logout">Logout</a>
-    </div>
+    <?php require "../view/templates/header.php"?>
     <div class="body">
         <div class="cover">
-            <img src="../../Assets/cover.png">
+            <img src="../Assets/cover.png">
             <div class="profile">
-                <img src="../../Profile/profile.jpg">
+                <img src="../Profile/profile.jpg">
             </div>
         </div>
         <h2>Abel Ghazinyan</h2>
+        <a class="logout" href="index.php?page=user&action=form">Edit</a>
         <div class="about">
 
             <ul>
