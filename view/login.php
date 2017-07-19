@@ -33,6 +33,7 @@
                    value="<?php echo htmlspecialchars($this->signUp->getLastName());?>"><br><br>
             <input type="text" id="long" name="email" placeholder="E-Mail"
                    value="<?php echo htmlspecialchars($this->signUp->getEmail());?>"><br><br>
+            <?php require "../view/templates/dateInput.php" ?><br>
             <input type="password" id="long" name="pswd" placeholder="New Password"
                    value="<?php echo htmlspecialchars($this->signUp->getPassword());?>"><br><br>
             <input type="password" id="long" name="cnfpswd" placeholder="Confirm Password"><br><br>

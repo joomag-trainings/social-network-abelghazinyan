@@ -5,12 +5,12 @@
     class Registration
     {
         private $signUpErr;
-        private $firstName,$lastName,$emailSignUp,$pswdNew,$gender;
+        private $firstName,$lastName,$emailSignUp,$years,$months,$days,$pswdNew,$gender;
         private static $formName = 'signUp';
         public function __construct()
         {
             $this->signUpErr = '';
-            $this->firstName = $this->lastName = $this->emailSignUp = $this->pswdNew = $this->gender = '';
+            $this->firstName = $this->lastName = $this->emailSignUp = $this->years = $this->months = $this->days = $this->pswdNew = $this->gender = '';
         }
 
         public function verifyForm()
@@ -64,6 +64,38 @@
                         } else {
                             $this->emailSignUp = Validation::cleanData($_POST['email']);
                         }
+                    }
+                    if (empty($_POST['years'])) {
+                        if ($errCount === 0) {
+                            $this->signUpErr = 'Birth date is required';
+                        }
+                        $errCount++;
+                    } else {
+
+                        if (date("Y")-($_POST['years']) < 16) {
+                            if ($errCount === 0) {
+                                $this->signUpErr = 'You must be older than 16';
+                                $errCount++;
+                            }
+                        } else {
+                            $this->years = Validation::cleanData($_POST['pswd']);
+                        }
+                    }
+                    if (empty($_POST['months'])) {
+                        if ($errCount === 0) {
+                            $this->signUpErr = 'Birth date is required';
+                        }
+                        $errCount++;
+                    } else {
+                        $this->months = Validation::cleanData($_POST['pswd']);
+                    }
+                    if (empty($_POST['days'])) {
+                        if ($errCount === 0) {
+                            $this->signUpErr = 'Birth date is required';
+                        }
+                        $errCount++;
+                    } else {
+                        $this->days = Validation::cleanData($_POST['pswd']);
                     }
                     if (empty($_POST['pswd'])) {
                         if ($errCount === 0) {
@@ -137,6 +169,21 @@
         public function getEmail ()
         {
             return $this->emailSignUp;
+        }
+
+        public function getYears ()
+        {
+            return $this->years;
+        }
+
+        public function getMonths ()
+        {
+            return $this->months;
+        }
+
+        public function getDays ()
+        {
+            return $this->days;
         }
 
         public function getPassword ()

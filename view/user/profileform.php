@@ -28,6 +28,8 @@
         <label for="fname">First Name</label> <input type="text" name="fname" id="fname" value="Abel"><br><br>
         <label for="lname">Last  Name</label><input type="text" name="lname" id="lname" value="Ghazinyan"><br><br>
         <label for="email">E-Mail</label><input type="text"  id="email" name="email" placeholder="E-Mail" value="ghazinyan.abel@gmail.com"><br><br>
+        <label>Birth Date</label><?php require "../view/templates/dateInput.php" ?><br><br>
+        <style>#date { width:400px;padding:auto;float:right}</style>
         <label for="oldpswd">Old Password</label><input type="password"  id="oldpswd" name="oldpswd" placeholder="Old Password" value="12345678987654"><br><br>
         <label for="newpswd">New Password</label><input type="password"  id="newpswd"name="newpswd" placeholder="New Password"><br><br>
         <label for="cnfpswd">Confirm Password</label><input type="password" id="cnfpswd" name="cnfpswd" placeholder="Confirm New Password"><br><br>
