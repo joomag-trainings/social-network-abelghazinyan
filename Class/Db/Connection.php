@@ -42,7 +42,7 @@
             return $res[0]["hash"];
         }
 
-        public function registerUser($email,$hash,$fname,$lname,$dob,$gender)
+        public function registerUser($email, $hash, $fname, $lname, $dob, $gender)
         {
             $statement = $this->connection->prepare(
                 "INSERT INTO users (id, email, hash, fname, lname, dob, gender)
