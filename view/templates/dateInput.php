@@ -31,8 +31,18 @@
     var years = document.getElementById('years')
     var months = document.getElementById('months');
     var days = document.getElementById('days');
-    var monthsArray = ['January','February','March','April','May','June',
-        'July','August','September','October','November','December'];
+    var monthsArray = [ 'January',
+                        'February',
+                        'March',
+                        'April',
+                        'May',
+                        'June',
+                        'July',
+                        'August',
+                        'September',
+                        'October',
+                        'November',
+                        'December'];
     var monthDays = [31,28,31,30,31,30,31,31,30,31,30,31];
 
     for (i=1900;i<=2017;i++){

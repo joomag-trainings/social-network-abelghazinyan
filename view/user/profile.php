@@ -18,15 +18,28 @@
                 <img src="../Profile/profile.jpg">
             </div>
         </div>
-        <h2>Abel Ghazinyan</h2>
+        <h2><?php echo $user->getFname(). ' ' . $user->getLname() ?></h2>
         <a class="logout" href="index.php?page=user&action=form">Edit</a>
         <div class="about">
 
             <ul>
-                <li>Studies at MSU</li>
-                <li>Worked at TUMO</li>
-                <li>Studied at Physmath</li>
-                <li>Does GYM and Street Workout</li>
+                <li>Date of Birth:
+                    <?php
+                        $date = $user->getDob();
+                        $dateObj   = DateTime::createFromFormat('!m', $date[1]);
+                        $monthName = $dateObj->format('F');
+                        echo $date[0] . " " . $monthName . " " . $date[2];
+                    ?>
+                </li>
+                <li>Gender:
+                    <?php
+                        if ($user->getGender() == 1) {
+                            echo " Male";
+                        } else {
+                            echo " Female";
+                        }
+                    ?>
+                </li>
             </ul>
         </div>
     </div>

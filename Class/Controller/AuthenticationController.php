@@ -1,30 +1,42 @@
 <?php
 
     namespace Controller;
+    use \Helper\Registration;
+    use \Helper\Validation;
+    use \Db\Connection;
 
     class AuthenticationController
     {
-        private $emailErr, $emailSignIn, $passwordErr, $passwordSignIn;
-        private static  $formUser = 'email', $formPassword = 'password', $formName = 'signIn';
+        private $emailErr;
+        private $emailSignIn;
+        private $passwordErr;
+        private $passwordSignIn;
+        private static  $formUser = 'email';
+        private static $formPassword = 'password';
+        private static $formName = 'signIn';
         private $dataBase;
         private $signUp;
 
         public function __construct()
         {
-            $this->emailErr = $this->emailSignIn = $this->passwordErr = $this->passwordSignIn = '';
-            $this->dataBase = new DataBase();
-            $this->dataBase->readDataBase();
+            $this->emailErr = '';
+            $this->emailSignIn = '';
+            $this->passwordErr = '';
+            $this->passwordSignIn = '';
+            $this->dataBase = Connection::getInstance();
             $this->signUp = new Registration();
         }
 
-        public function actionShow ()
+        public function actionShow()
         {
             if ($this->checkIfRemembered()) {
-                header("Location:../public/index.php?page=user&action=profile");
+                $id = $this->dataBase->getUserId($_COOKIE['user']);
+                header("Location:../public/index.php?page=user&action=profile&id={$id}");
             } elseif ($this->readInputs()) {
                 if ($this->verifyUser()) {
                     $this->actionLogin();
-                    header("Location:../public/index.php?page=user&action=profile");
+                    $id = $this->dataBase->getUserId($this->emailSignIn);
+                    header("Location:../public/index.php?page=user&action=profile&id={$id}");
                 }
             }
 
@@ -72,7 +84,6 @@
                     if ($this->emailErr === '' && $this->passwordErr === '') {
                         if ($this->dataBase->validUser($this->emailSignIn)) {
                             if (password_verify($this->passwordSignIn, $this->dataBase->getHash($this->emailSignIn))) {
-                                ///////LOGINED///////
                                 $logIn = true;
                             } else {
                                 $this->passwordErr = 'Password/Email incorrect!';

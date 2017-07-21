@@ -37,7 +37,9 @@
         die;
     }
 
-    $controller->$action();
-
-
+    if (empty($_GET['id'])) {
+        $controller->$action();
+    } else {
+        $controller->$action($_GET['id']);
+    }
 

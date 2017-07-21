@@ -7,12 +7,14 @@
      */
 
     namespace Controller;
-
+    use \Helper\ImageUploader;
+    use Model\UserModel;
 
     class UserController
     {
-        public function actionProfile ()
+        public function actionProfile ($id)
         {
+            $user = new UserModel($id);
             require '../view/user/profile.php';
         }
 

@@ -1,16 +1,31 @@
 <?php
 
-    namespace Controller;
+    namespace Helper;
+    use \Db\Connection;
 
     class Registration
     {
         private $signUpErr;
-        private $firstName,$lastName,$emailSignUp,$years,$months,$days,$pswdNew,$gender;
+        private $firstName;
+        private $lastName;
+        private $emailSignUp;
+        private $years;
+        private $months;
+        private $days;
+        private $pswdNew;
+        private $gender;
         private static $formName = 'signUp';
         public function __construct()
         {
             $this->signUpErr = '';
-            $this->firstName = $this->lastName = $this->emailSignUp = $this->years = $this->months = $this->days = $this->pswdNew = $this->gender = '';
+            $this->firstName = '';
+            $this->lastName = '';
+            $this->emailSignUp = '';
+            $this->years = '';
+            $this->months = '';
+            $this->days = '';
+            $this->pswdNew = '';
+            $this->gender = '';
         }
 
         public function verifyForm()
@@ -71,14 +86,13 @@
                         }
                         $errCount++;
                     } else {
-
                         if (date("Y")-($_POST['years']) < 16) {
                             if ($errCount === 0) {
                                 $this->signUpErr = 'You must be older than 16';
                                 $errCount++;
                             }
                         } else {
-                            $this->years = Validation::cleanData($_POST['pswd']);
+                            $this->years = Validation::cleanData($_POST['years']);
                         }
                     }
                     if (empty($_POST['months'])) {
@@ -87,7 +101,7 @@
                         }
                         $errCount++;
                     } else {
-                        $this->months = Validation::cleanData($_POST['pswd']);
+                        $this->months = Validation::cleanData($_POST['months']);
                     }
                     if (empty($_POST['days'])) {
                         if ($errCount === 0) {
@@ -95,7 +109,7 @@
                         }
                         $errCount++;
                     } else {
-                        $this->days = Validation::cleanData($_POST['pswd']);
+                        $this->days = Validation::cleanData($_POST['days']);
                     }
                     if (empty($_POST['pswd'])) {
                         if ($errCount === 0) {
@@ -143,60 +157,71 @@
             }
         }
 
-        public function registerUser ()
+        public function registerUser()
         {
-            $dataBase = new DataBase();
-            $dataBase->readDataBase();
+            $dataBase = Connection::getInstance();
             if($dataBase->validUser($this->emailSignUp)) {
                 $this->signUpErr = 'Email is already in use!';
             } else {
-                $string = $this->emailSignUp . ' ' . password_hash($this->pswdNew,PASSWORD_DEFAULT);
-                $dataBase->addUser($string);
+                $date = $this->days . " " . $this->months . " " . $this->years;
+                $dob = date('d-m-Y', strtotime($date));
+                if($this->gender === 'male') {
+                    $gender = 1;
+                } else {
+                    $gender = 0;
+                }
+                $dataBase->registerUser(
+                                        $this->emailSignUp,
+                                        password_hash($this->pswdNew,PASSWORD_DEFAULT),
+                                        $this->firstName,
+                                        $this->lastName,
+                                        $dob,
+                                        $gender
+                );
             }
-
         }
 
-        public function getFirstName ()
+        public function getFirstName()
         {
             return $this->firstName;
         }
 
-        public function getLastName ()
+        public function getLastName()
         {
             return $this->lastName;
         }
 
-        public function getEmail ()
+        public function getEmail()
         {
             return $this->emailSignUp;
         }
 
-        public function getYears ()
+        public function getYears()
         {
             return $this->years;
         }
 
-        public function getMonths ()
+        public function getMonths()
         {
             return $this->months;
         }
 
-        public function getDays ()
+        public function getDays()
         {
             return $this->days;
         }
 
-        public function getPassword ()
+        public function getPassword()
         {
             return $this->pswdNew;
         }
 
-        public function getGender ()
+        public function getGender()
         {
             return $this->gender;
         }
 
-        public function getError ()
+        public function getError()
         {
             return $this->signUpErr;
         }
