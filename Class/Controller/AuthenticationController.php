@@ -30,7 +30,7 @@
         public function actionShow()
         {
             if ($this->checkIfRemembered()) {
-                $id = $this->dataBase->getUserId($_COOKIE['user']);
+                $id = $_COOKIE['id'];
                 header("Location:../public/index.php?page=user&action=profile&id={$id}");
             } elseif ($this->readInputs()) {
                 if ($this->verifyUser()) {
@@ -82,7 +82,7 @@
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if ($_POST['form'] == self::$formName) {
                     if ($this->emailErr === '' && $this->passwordErr === '') {
-                        if ($this->dataBase->validUser($this->emailSignIn)) {
+                        if ($this->dataBase->validUserByEmail($this->emailSignIn)) {
                             if (password_verify($this->passwordSignIn, $this->dataBase->getHash($this->emailSignIn))) {
                                 $logIn = true;
                             } else {
@@ -99,13 +99,13 @@
 
         public function actionLogin()
         {
-            setcookie('user', $this->emailSignIn);
+            setcookie('id', $this->dataBase->getUserId($this->emailSignIn));
         }
 
         public function actionLogout()
         {
-            unset($_COOKIE['user']);
-            setcookie('user', null, 1);
+            unset($_COOKIE['id']);
+            setcookie('id', null, 1);
             header("Location:../public/index.php?page=authentication&action=show");
         }
 
@@ -114,13 +114,13 @@
             $login = false;
 
             if (isset($_COOKIE)) {
-                $user = '';
+                $id= '';
 
-                if (!empty($_COOKIE['user'])) {
-                    $user = $_COOKIE['user'];
+                if (!empty($_COOKIE['id'])) {
+                    $id = $_COOKIE['id'];
                 }
 
-                if ($this->dataBase->validUser($user)) {
+                if ($this->dataBase->validUserById($id)) {
 
                     $login = true;
                 }

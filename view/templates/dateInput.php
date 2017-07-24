@@ -18,13 +18,23 @@
         background-position-x: 100%;
         background-position-y: 5px;
         border:2px white solid;
-        font-size: 15px;
+        font-size: 20px;
         color:#34495e;
         background-color: aliceblue;
-        border-radius: 5px;
-        padding: 5px;
         font-family: "DejaVu Sans";
         padding-right: 2rem;
+    }
+
+    #years {
+        width:160px;
+    }
+
+    #months {
+        width:160px;
+    }
+
+    #days {
+        width:82px;
     }
 </style>
 <script>

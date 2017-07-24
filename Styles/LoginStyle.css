@@ -2,16 +2,17 @@ body {
     margin:0px;
     border:0px;
     padding: 0px;
-    background-color: #2c3e50;
-    background-image: url("https://www.transparenttextures.com/patterns/diagmonds.png");
+    background: url(../Assets/bg.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 .header {
-    background-color: #34495e;
+    background-color: rgba(0,0,0,0.5);
     width:100%;
     height:100px;
-    border-bottom:5px #2c3e50 solid;
-
 }
 .login {
     float: right;
@@ -22,13 +23,11 @@ input {
     border:2px white solid;
     font-size: 20px;
     color:#34495e;
-    background-color: aliceblue;
-    border-radius: 5px;
+    background-color: white;
     font-family: "DejaVu Sans";
     width:203px;
 }
 .submit {
-    border-radius: 3px;
     font-family: "DejaVu Sans";
     background-color: #3498db;
     color:antiquewhite;
@@ -41,12 +40,10 @@ input {
     padding: 50px;
     margin:0px auto;
 
-    width:420px;
+    width:410px;
     margin-top:50px;
 
-    border-radius:5px;
-    background-color: #34495e;
-    border:5px #2c3e50 solid;
+    background-color:  rgba(0,0,0,0.5);
 }
 #long {
     width:410px;
@@ -70,4 +67,14 @@ h1 {
     color:white;
     text-align: center;
     font-family: "DejaVu Sans";
+}
+
+input[type="radio"] {
+    -webkit-appearance: checkbox;
+    -moz-appearance: checkbox;
+}
+
+#signup {
+    width:203px;
+    float:right;
 }

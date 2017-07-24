@@ -32,7 +32,7 @@
     </div>
     <div class="comment">
         <form>
-            <input type="text" name="comment">
+            <input type="text" name="comment" class="commentInput">
             <input type="submit" class="submit" value="Comment">
         </form>
     </div>

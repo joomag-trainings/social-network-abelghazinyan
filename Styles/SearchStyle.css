@@ -1,0 +1,57 @@
+body {
+    padding: 0px;
+    margin:0px;
+    background-color: #BDBDBD;
+}
+.body {
+    width:1000px;
+    height:800px;
+    margin:auto;
+    margin-top:50px;
+    background-color: #FAFAFA;
+}
+
+.userBox {
+    position: relative;
+    width:400px;
+    height:100px ;
+    margin:auto;
+    padding: 5px;
+    background-color: #E0E0E0;
+    margin-top:10px;
+}
+
+.avatar {
+    position:absolute;
+    float: left;
+    width:100px;
+    height: 100px;
+    height: 100px;
+}
+
+div.avatar > img {
+    max-width:100%;
+    min-width:100%;
+    max-height:100%;
+}
+
+.aboutUser {
+    position: absolute;
+    left:110px;
+    font-family: "DejaVu Sans";
+    float:left;
+    width: 300px;
+    height:100px;
+}
+
+h1 {
+    font-size: 20px;
+    color: #2c3e50;
+    text-align: center;
+}
+
+h2 {
+    margin-top:2px;
+    font-size: 10px;
+    color: #34495e;
+}

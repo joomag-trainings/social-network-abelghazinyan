@@ -14,9 +14,9 @@
             <input type="hidden" name="form" value="signIn">
             <input type="text" name="email" id="email" placeholder="E-Mail"
                    value="<?php echo htmlspecialchars($this->getUser());?>">
-            <span style="color:crimson;font-size: 15px;background-color: #ecf0f1"><?php echo $this->getUserError();?></span>
+            <span style="color:crimson;font-size: 15px;font-family: 'DejaVu Sans'"><?php echo $this->getUserError();?></span>
             <input type="password" name="password" id="password" placeholder="Password">
-            <span style="color:crimson;font-size: 15px;background-color: #ecf0f1" ><?php echo $this->getPasswordError();?></span>
+            <span style="color:crimson;font-size: 15px;font-family: 'DejaVu Sans'" ><?php echo $this->getPasswordError();?></span>
             <input class="submit" type="submit" value="SIGN IN">
 
         </form>
@@ -24,7 +24,7 @@
     </div>
 
     <div class="signup">
-        <h1>Create an Account</h1>
+        <h1>CREATE ACCOUNT</h1>
         <form name="signUp" method="post">
             <input type="hidden" name="form" value="signUp">
             <input type="text" name="fname" placeholder="First Name"
@@ -38,12 +38,13 @@
                    value="<?php echo htmlspecialchars($this->signUp->getPassword());?>"><br><br>
             <input type="password" id="long" name="cnfpswd" placeholder="Confirm Password"><br><br>
             <div class="signupcenter">
-            <label for="male">Male</label> <input type="radio" id="male" name="gender" value="male"
+            <label for="male" style="font-family: 'DejaVu Sans';font-size: 20px">male</label> <input type="radio" id="male" name="gender" value="male"
                                                     <?php if($this->signUp->getGender()==='male') echo "checked";?>>
-            <label for="female">Female</label><input type="radio" id="female" name="gender" value="female"
-                                                    <?php if($this->signUp->getGender()==='female') echo "checked";?>><br><br>
-            <input class="submit" type="submit" value="SIGN UP">
-            <span style="color:crimson;font-size: 15px;background-color: #ecf0f1" >   <?php echo $this->signUp->getError();?></span>
+            <label for="female" style="font-family: 'DejaVu Sans';font-size: 20px">&nbsp;&nbsp;female</label><input type="radio" id="female" name="gender" value="female"
+                                                    <?php if($this->signUp->getGender()==='female') echo "checked";?>>
+            <input class="submit" type="submit" id="signup" value="SIGN UP"><br>
+            <span style="color:crimson;font-size: 15px;font-family: 'DejaVu Sans'" >   <?php echo $this->signUp->getError();?></span>
+            <br>
             </div>
          </form>
     </div>

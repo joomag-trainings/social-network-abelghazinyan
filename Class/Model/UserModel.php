@@ -12,6 +12,10 @@
         private $lname;
         private $dob;
         private $gender;
+        private $city;
+        private $work;
+        private $education;
+        private $friendList;
 
         public function __construct($id)
         {
@@ -24,6 +28,46 @@
             $this->lname = $data['lname'];
             $this->dob = explode('-',$data['dob']);
             $this->gender = $data['gender'];
+            $this->city = $data['city'];
+            $this->work = $data['work'];
+            $this->education = $data['education'];
+            $this->friendList = $db->getFriendList($id);
+        }
+
+        public function getBirthday()
+        {
+            $date = getDob();
+            $dateObj   = DateTime::createFromFormat('!m', $date[1]);
+            $monthName = $dateObj->format('F');
+            $dob[0] = $this->dob[0];
+            $dob[1] = $monthName;
+            $dob[2] = $this->dob[2];
+            return $dob;
+        }
+
+        /**
+         * @return mixed
+         */
+        public function getFriendList()
+        {
+            return $this->friendList;
+        }
+
+
+        /**
+         * @return mixed
+         */
+        public function getId()
+        {
+            return $this->id;
+        }
+
+        /**
+         * @param mixed $id
+         */
+        public function setId($id)
+        {
+            $this->id = $id;
         }
 
         /**
@@ -120,5 +164,53 @@
         public function setGender($gender)
         {
             $this->gender = $gender;
+        }
+
+        /**
+         * @return mixed
+         */
+        public function getCity()
+        {
+            return $this->city;
+        }
+
+        /**
+         * @param mixed $city
+         */
+        public function setCity($city)
+        {
+            $this->city = $city;
+        }
+
+        /**
+         * @return mixed
+         */
+        public function getWork()
+        {
+            return $this->work;
+        }
+
+        /**
+         * @param mixed $work
+         */
+        public function setWork($work)
+        {
+            $this->work = $work;
+        }
+
+        /**
+         * @return mixed
+         */
+        public function getEducation()
+        {
+            return $this->education;
+        }
+
+        /**
+         * @param mixed $education
+         */
+        public function setEducation($education)
+        {
+            $this->education = $education;
         }
     }

@@ -12,26 +12,25 @@
 <body>
     <?php require "../view/templates/header.php"?>
     <div class="body">
-        <div class="cover">
-            <img src="../Assets/cover.png">
-            <div class="profile">
-                <img src="../Profile/profile.jpg">
-            </div>
+        <div class="profile">
+            <img src="../Profile/profile.jpg">
         </div>
-        <h2><?php echo $user->getFname(). ' ' . $user->getLname() ?></h2>
-        <a class="logout" href="index.php?page=user&action=form">Edit</a>
-        <div class="about">
 
+
+        <div class="about">
+            <div class="name">
+            <h2><?php echo $user->getFname(). ' ' . $user->getLname() ?></h2>
+            </div>
             <ul>
-                <li>Date of Birth:
+                <li>Birthday -
                     <?php
                         $date = $user->getDob();
                         $dateObj   = DateTime::createFromFormat('!m', $date[1]);
                         $monthName = $dateObj->format('F');
                         echo $date[0] . " " . $monthName . " " . $date[2];
                     ?>
-                </li>
-                <li>Gender:
+                </li><br>
+                <li>Gender -
                     <?php
                         if ($user->getGender() == 1) {
                             echo " Male";
@@ -39,9 +38,50 @@
                             echo " Female";
                         }
                     ?>
-                </li>
+                </li><br>
+                <li>City -
+                    <?php
+                        if ($user->getCity()==null) {
+                            echo "Not specified";
+                        } else {
+                            echo $user->getCity();
+                        }
+                    ?>
+                </li><br>
+                <li>Work -
+                    <?php
+                        if ($user->getWork()==null) {
+                            echo "Not specified";
+                        } else {
+                            echo $user->getWork();
+                        }
+                    ?>
+                </li><br>
+                <li>Education -
+                    <?php
+                        if ($user->getEducation()==null) {
+                            echo "Not specified";
+                        } else {
+                            echo $user->getEducation();
+                        }
+                    ?>
+                </li><br>
             </ul>
         </div>
+        <div class="editdiv">
+            <?php
+                if ($_COOKIE['id'] == $user->getId()) {
+                    echo "<a class='edit' href='index.php?page=user&action=form&id={$_COOKIE['id']}'>Edit Profile</a>";
+                } else {
+                    echo "<a class='edit' href='index.php?page=user&action=request&id={$user->getId()}'>Send Request</a>";
+                }
+            ?>
+        </div>
+        <div class="buttons">
+            <a class="edit" href="index.php?page=user&action=photos">Photos</a>
+            <a class="edit" href="index.php?page=search&action=friendlist">Friends</a>
+        </div>
     </div>
+
 </body>
 </html>

@@ -160,7 +160,7 @@
         public function registerUser()
         {
             $dataBase = Connection::getInstance();
-            if($dataBase->validUser($this->emailSignUp)) {
+            if($dataBase->validUserByEmail($this->emailSignUp)) {
                 $this->signUpErr = 'Email is already in use!';
             } else {
                 $date = $this->days . " " . $this->months . " " . $this->years;

@@ -25,7 +25,6 @@
     $page .= 'Controller';
     $page = 'Controller\\' . $page;
 
-
     $action = strtolower($action);
     $action = ucfirst($action);
     $action = 'action' . $action;
@@ -36,10 +35,12 @@
         header('Location: http://localhost/social-network/public/index.php?page=error&action=notFound');
         die;
     }
+    \Helper\Debug::consoleLog($page ." . " . $action);
 
-    if (empty($_GET['id'])) {
-        $controller->$action();
-    } else {
+    if (!empty($_GET['id'])) {
         $controller->$action($_GET['id']);
+    } else if (!empty($_GET['key'])){
+        $controller->$action($_GET['key']);
+    } else {
+        $controller->$action();
     }
-
