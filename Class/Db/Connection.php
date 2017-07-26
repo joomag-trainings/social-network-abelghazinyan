@@ -23,6 +23,11 @@
             return self::$instance;
         }
 
+        public function getConnection()
+        {
+            return $this->connection;
+        }
+
         public function validUserById($id)
         {
             $statement=$this->connection->prepare("SELECT * FROM users where id= '{$id}'");
@@ -119,60 +124,34 @@
             }
         }
 
-        public function getUsersByName ($name)
+        public function getUsersByName ($name,$start,$limit)
         {
-            $statement=$this->connection->prepare("SELECT * FROM users where fname='{$name}' OR lname='{$name}'");
-            $statement->execute();
-            $res = $statement->fetchAll(\PDO::FETCH_ASSOC);
-            return $res;
-        }
-
-        public function getUsersByFullName ($fname,$lname)
-        {
-            $statement=$this->connection->prepare("SELECT * FROM users where fname='{$fname}' OR lname='{$lname}' OR fname='{$lname}' OR lname='{$fname}' ");
-            $statement->execute();
-            $res = $statement->fetchAll(\PDO::FETCH_ASSOC);
-            return $res;
-        }
-
-        public function sendFriendRequest($id)
-        {
-            $type = self::$NOTIFICATION_TYPE_REQUEST;
-            $id2 = $_COOKIE['id'];
-            $statement = $this->connection->prepare(
-                "INSERT INTO notifications (id_1, id_2, type)
-                          VALUES (:id_1, :id_2, :type)"
-            );
-            $statement->bindParam('id_1',$id);
-            $statement->bindParam('id_2',$id2);
-            $statement->bindParam('type',$type);
-            $statement->execute();
-        }
-
-        public function getNotification($id,$type)
-        {
-            $statement=$this->connection->prepare("SELECT * FROM notifications where id_1='{$id}' AND type='$type' ");
-            $statement->execute();
-            $res = $statement->fetchAll(\PDO::FETCH_ASSOC);
-            if (!empty($res)) {
-                return true;
+            if ($start == 0 && $limit ==0) {
+                $statement = $this->connection->prepare("SELECT * FROM users where fname='{$name}' OR lname='{$name}'");
+                $statement->execute();
+                $res = $statement->fetchAll(\PDO::FETCH_ASSOC);
+                return $res;
             } else {
-                return false;
+                $statement = $this->connection->prepare("SELECT * FROM users where fname='{$name}' OR lname='{$name}' LIMIT {$limit} OFFSET {$start}");
+                $statement->execute();
+                $res = $statement->fetchAll(\PDO::FETCH_ASSOC);
+                return $res;
             }
         }
 
-        public function getNotificationSender($id,$type)
+        public function getUsersByFullName ($fname,$lname,$start,$limit)
         {
-            $statement=$this->connection->prepare("SELECT * FROM notifications where id_1='{$id}' AND type='$type' ");
-            $statement->execute();
-            $res = $statement->fetchAll(\PDO::FETCH_ASSOC);
-            return $res[0]['id_2'];
-        }
-
-        public function removeNotification($id,$senderId,$type)
-        {
-            $statement=$this->connection->prepare("DELETE FROM notifications where id_1='{$id}' AND id_2='{$senderId}' AND type='$type' ");
-            $statement->execute();
+            if ($start == 0 && $limit ==0) {
+                $statement = $this->connection->prepare("SELECT * FROM users where fname='{$fname}' OR lname='{$lname}' OR fname='{$lname}' OR lname='{$fname}' ");
+                $statement->execute();
+                $res = $statement->fetchAll(\PDO::FETCH_ASSOC);
+                return $res;
+            } else {
+                $statement = $this->connection->prepare("SELECT * FROM users where fname='{$fname}' OR lname='{$lname}' OR fname='{$lname}' OR lname='{$fname}' LIMIT {$limit} OFFSET {$start} ");
+                $statement->execute();
+                $res = $statement->fetchAll(\PDO::FETCH_ASSOC);
+                return $res;
+            }
         }
 
         public function addFriend($id_1,$id_2)
@@ -212,5 +191,32 @@
                 $list[] = $row['id_2'];
             }
             return $list;
+        }
+
+        public function checkIfFriend($id)
+        {
+            $id1 = $_COOKIE['id'];
+            $statement=$this->connection->prepare("SELECT * FROM friendlist where id_1='{$id1}' AND id_2='{$id}'");
+            $statement->execute();
+            $res = $statement->fetchAll(\PDO::FETCH_ASSOC);
+            if (!empty($res)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        public function getTotalCountOfUsersByName($name) {
+            $statement = $this->connection->prepare("SELECT COUNT(*) AS `total` FROM users where fname='{$name}' OR lname='{$name}'");
+            $statement->execute();
+            $res = $statement->fetch(\PDO::FETCH_ASSOC);
+            return $res['total'];
+        }
+
+        public function getTotalCountOfUsersByFullName($fname,$lname) {
+            $statement = $this->connection->prepare("SELECT COUNT(*) AS `total` FROM users where fname='{$fname}' OR lname='{$lname}' OR fname='{$lname}' OR lname='{$fname}' ");
+            $statement->execute();
+            $res = $statement->fetch(\PDO::FETCH_ASSOC);
+            return $res['total'];
         }
     }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 24, 2017 at 03:10 PM
+-- Generation Time: Jul 26, 2017 at 03:31 PM
 -- Server version: 5.7.18-0ubuntu0.16.04.1
 -- PHP Version: 7.0.18-0ubuntu0.16.04.1
 
@@ -29,8 +29,8 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `friendlist` (
-  `id_1` int(100) NOT NULL,
-  `id_2` int(100) NOT NULL
+  `id_1` int(11) NOT NULL,
+  `id_2` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -38,16 +38,8 @@ CREATE TABLE `friendlist` (
 --
 
 INSERT INTO `friendlist` (`id_1`, `id_2`) VALUES
-(2, 1),
-(1, 2),
-(1, 4),
-(4, 1),
-(1, 8),
-(8, 1),
-(1, 20),
-(20, 1),
-(1, 21),
-(21, 1);
+(11, 1),
+(1, 11);
 
 -- --------------------------------------------------------
 
@@ -56,10 +48,30 @@ INSERT INTO `friendlist` (`id_1`, `id_2`) VALUES
 --
 
 CREATE TABLE `notifications` (
+  `id` int(11) UNSIGNED NOT NULL,
   `id_1` int(100) UNSIGNED NOT NULL,
   `id_2` int(100) UNSIGNED NOT NULL,
-  `type` varchar(15) NOT NULL
+  `time` timestamp NULL DEFAULT NULL,
+  `type` varchar(15) NOT NULL,
+  `text` tinytext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `notifications`
+--
+
+INSERT INTO `notifications` (`id`, `id_1`, `id_2`, `time`, `type`, `text`) VALUES
+(12, 1, 2, '2017-07-26 08:44:30', 'request', 'Hello World!'),
+(13, 1, 11, '2017-07-26 09:53:37', 'request', 'Hello World!'),
+(16, 1, 10, '2017-07-26 10:39:54', 'post', 'Testing Notification'),
+(17, 1, 10, '2017-07-26 10:40:05', 'post', 'Testing Notification'),
+(18, 1, 16, '2017-07-26 10:40:14', 'post', 'Testing Notification'),
+(19, 1, 23, '2017-07-26 10:40:23', 'post', 'Testing Notification'),
+(20, 1, 5, '2017-07-26 10:40:31', 'post', 'Testing Notification'),
+(21, 1, 12, '2017-07-26 10:40:38', 'post', 'Testing Notification'),
+(22, 1, 31, '2017-07-26 10:40:45', 'post', 'Testing Notification'),
+(23, 1, 4, '2017-07-26 10:40:51', 'post', 'Testing Notification'),
+(24, 1, 14, '2017-07-26 10:40:59', 'post', 'Testing Notification');
 
 -- --------------------------------------------------------
 
@@ -85,7 +97,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `hash`, `fname`, `lname`, `dob`, `gender`, `city`, `work`, `education`) VALUES
-(1, 'ghazinyan.abel@gmail.com', '$2y$10$hnQ6zolHytgY2sejAVGGiOSqsa9jkupyqiN8YiFcH5Bb4xGYLM0AO', 'Abel', 'Ghazinyan', '19-12-1998', 1, 'Yerevan/Armenia', 'Joomag Armenia', 'Moscow State University'),
+(1, 'ghazinyan.abel@gmail.com', '$2y$10$hnQ6zolHytgY2sejAVGGiOSqsa9jkupyqiN8YiFcH5Bb4xGYLM0AO', 'Abel', 'Ghazinyan', '15-09-1992', 1, 'Yerevan/Armenia', '', 'Moscow State University'),
 (2, 'artak@mail.ru', '$2y$10$sgPRJKgK8JjUlgORVJ7YauEnx21hWwpKUIwdXsbpERz7XqaYiGV5q', 'Artak', 'Melkonyan', '14-10-2004', 1, 'Yerevan', '', 'MSU'),
 (3, 'smith@noah.ruj', '$2y$10$Oq1YybGYj4O8Kd3QaWlEM.pz3NvmxC3VvEpWlergu4okqMCd1Ny3G', 'Noah', 'Smith', '18-12-1917', 1, NULL, NULL, NULL),
 (4, 'liam@john.eur', '$2y$10$csX2UwT/TY0T01w9QB/pwuU8ByoCoZxUjwN2Td4rut.J3H/tLta7C', 'Liam', 'Johnson', '13-11-1907', 1, NULL, NULL, NULL),
@@ -115,7 +127,13 @@ INSERT INTO `users` (`id`, `email`, `hash`, `fname`, `lname`, `dob`, `gender`, `
 (28, 'ian@young.paqowsfk', '$2y$10$5R4T8w6luaSVO2dHn2yBr.uuAmOIegj4dNo8/YeUEfiHRk17lCoN2', 'Ian', 'Young', '03-03-1946', 1, NULL, NULL, NULL),
 (29, 'parkerking@aiknwsk.h', '$2y$10$4TFsqqMO/JEcQDWk4ezTgOB6I/v7L8/A9FZguvcN8lEC4/c4QtOUC', 'Parkeruhi', 'KIng', '14-05-2000', 0, NULL, NULL, NULL),
 (30, 'parkabel@tijyot.sokg', '$2y$10$z1bDbBuCRHR.J3nPAK3ER.qXPTcoo/8Z9jL2QmLbW0ZwlNupd1QOq', 'Abel', 'KIng', '08-01-1958', 0, NULL, NULL, NULL),
-(31, 'art-abel@gmail.com', '$2y$10$1X0YcvL7bOhDzHO6KTYki.XX2RAGPeQYP/l/JBtuk4DNMOo.Y0XSq', 'Karen', 'Abel sds', '18-11-1916', 1, '', '', '');
+(31, 'art-abel@gmail.com', '$2y$10$1X0YcvL7bOhDzHO6KTYki.XX2RAGPeQYP/l/JBtuk4DNMOo.Y0XSq', 'Karen', 'Abel sds', '18-11-1916', 1, '', '', ''),
+(32, 'asdsa@dfdf.adasd', '$2y$10$SkhPG1Uiqhbzox8dW4E17.5QXSv2BIEusffalK13Wy74XZh.MjAJy', 'Abel', 'Poghosyan', '15-10-1914', 1, NULL, NULL, NULL),
+(33, 'asa@sas.as', '$2y$10$V/1kNqHwOfQ7eB/aZUYANOrid2UzYrE2STwDWebTR9jBCoNVLHyna', 'Abel', 'Petrosyan', '16-10-1916', 1, NULL, NULL, NULL),
+(34, 'asa@shas.as', '$2y$10$IYW/CM1lyfMNW9.CleeJne/UYcy6N/iyMGkQdLdx68jU718ffBHLm', 'Abel', 'Muradyan', '15-10-1916', 1, NULL, NULL, NULL),
+(35, 'asha@shas.as', '$2y$10$KSyX9HIC7UIgpUMlfPuDK.aOq.sNJF/vVNpaxzE2EHeY1.ZA0ZsBe', 'Abel', 'Babayan', '15-12-1916', 1, NULL, NULL, NULL),
+(36, 'ashha@shas.as', '$2y$10$lK9KrvyTIUFCnaJ5OxHkkuZoLzVn6MZt3rGMsc30iWdov3h33aDGu', 'Abel', 'Hovhannisyan', '13-04-1916', 1, NULL, NULL, NULL),
+(37, 'jkdsfkjds@dsd.dsd', '$2y$10$DA5ljuhLzxDIXFZB2wCaueW5hkW6g.gxDi1P/YEf0g56/FoloUi0C', 'Abel', 'Abel', '17-11-1914', 1, NULL, NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -125,7 +143,7 @@ INSERT INTO `users` (`id`, `email`, `hash`, `fname`, `lname`, `dob`, `gender`, `
 -- Indexes for table `notifications`
 --
 ALTER TABLE `notifications`
-  ADD PRIMARY KEY (`id_1`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `users`
@@ -138,10 +156,15 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `notifications`
+--
+ALTER TABLE `notifications`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;COMMIT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

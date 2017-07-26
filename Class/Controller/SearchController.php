@@ -13,6 +13,7 @@
     class SearchController
     {
         private $connection;
+        const PAGE_SIZE=3;
         public function __construct()
         {
             $this->connection = Connection::getInstance();
@@ -38,20 +39,29 @@
             echo "</a>";
         }
 
-        public function actionSearch($key)
+        public function actionSearch($key,$page)
         {
+            if ($page < 1) {
+                $page = 1;
+            }
+            $start = ($page - 1) * self::PAGE_SIZE;
+            $offset = self::PAGE_SIZE;
+            $overalUsers = null;
             $fullKey = explode(' ',$key);
             if (sizeof($fullKey) === 1) {
-                $list = $this->connection->getUsersByName($fullKey[0]);
+                $list = $this->connection->getUsersByName($fullKey[0],$start,$offset);
+                $overalUsers =  $this->connection->getTotalCountOfUsersByName($fullKey[0]);
                 foreach ($list as $user) {
                     $userList[] = new UserModel($user['id']);
                 }
             } else {
-                $list = $this->connection->getUsersByFullName($fullKey[0],$fullKey[1]);
+                $list = $this->connection->getUsersByFullName($fullKey[0],$fullKey[1],$start,$offset);
+                $overalUsers =  $this->connection->getTotalCountOfUsersByFullName($fullKey[0],$fullKey[1]);
                 foreach ($list as $user) {
                     $userList[] = new UserModel($user['id']);
                 }
             }
+            $lastpage = ceil($overalUsers / self::PAGE_SIZE);
             require '../view/user/search.php';
         }
 

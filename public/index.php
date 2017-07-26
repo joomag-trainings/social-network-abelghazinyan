@@ -40,7 +40,9 @@
     if (!empty($_GET['id'])) {
         $controller->$action($_GET['id']);
     } else if (!empty($_GET['key'])){
-        $controller->$action($_GET['key']);
+        if (!empty($_GET['result'])) {
+            $controller->$action($_GET['key'],$_GET['result']);
+        }
     } else {
         $controller->$action();
     }

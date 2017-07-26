@@ -70,10 +70,23 @@
         </div>
         <div class="editdiv">
             <?php
+
+                if( Service\NotificationManager::checkIfRequestSent($user->getId())) {
+                    \Helper\Debug::consoleLog("Sent");
+                } else {
+                    \Helper\Debug::consoleLog("Not Sent");
+                }
+
                 if ($_COOKIE['id'] == $user->getId()) {
                     echo "<a class='edit' href='index.php?page=user&action=form&id={$_COOKIE['id']}'>Edit Profile</a>";
-                } else {
+                } else if (!\Service\NotificationManager::checkIfRequestSent($user->getId()) && !$this->connection->checkIfFriend($user->getId())) {
                     echo "<a class='edit' href='index.php?page=user&action=request&id={$user->getId()}'>Send Request</a>";
+                }
+                if (\Service\NotificationManager::checkIfRequestSent($user->getId()) && !$this->connection->checkIfFriend($user->getId())){
+                    echo "<a class='edit' href=''>Request Sent</a>";
+                }
+                if ($this->connection->checkIfFriend($user->getId())) {
+                    echo "<a class='edit' href=''>Friends</a>";
                 }
             ?>
         </div>

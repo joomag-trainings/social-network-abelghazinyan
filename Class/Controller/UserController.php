@@ -10,6 +10,8 @@
     use Db\Connection;
     use \Helper\ImageUploader;
     use Model\UserModel;
+    use Model\Notification;
+    use Service\NotificationManager;
 
     class UserController
     {
@@ -36,23 +38,51 @@
             require '../view/user/photos.php';
         }
 
+        public function actionRemovenotification($id)
+        {
+            NotificationManager::removeNotificationById($id);
+            header("Location:../public/index.php?page=user&action=profile&id={$id}");
+        }
+
         public function actionAcceptrequest($senderId)
         {
             $id = $_COOKIE['id'];
-            $this->connection->removeNotification($id,$senderId,Connection::$NOTIFICATION_TYPE_REQUEST);
+            NotificationManager::removeFriendRequest($_COOKIE['id'],$senderId);
             $this->connection->addFriend($id,$senderId);
+
+            $notification = new Notification();
+            $notification->setRecieverId($senderId);
+            $notification->setSenderId($_COOKIE['id']);
+            $notification->setType(Notification::NOTIFICATION_TYPE_POST);
+            $notification->setText("Accepted your request");
+            NotificationManager::makeNotification($notification);
+
             header("Location:../public/index.php?page=user&action=profile&id={$id}");
         }
 
         public function actionRemoveRequest($senderId)
         {
             $id = $_COOKIE['id'];
-            $this->connection->removeNotification($id,$senderId,Connection::$NOTIFICATION_TYPE_REQUEST);
+            NotificationManager::removeFriendRequest($_COOKIE['id'],$senderId);
+
+            $notification = new Notification();
+            $notification->setRecieverId($senderId);
+            $notification->setSenderId($_COOKIE['id']);
+            $notification->setType(Notification::NOTIFICATION_TYPE_POST);
+            $notification->setText("Rejected your request");
+            NotificationManager::makeNotification($notification);
+
             header("Location:../public/index.php?page=user&action=profile&id={$id}");
         }
 
         public function actionRequest($id) {
-            $this->connection->sendFriendRequest($id);
+            $notificationManager = new NotificationManager();
+            $notification = new Notification();
+            $notification->setType(Notification::NOTIFICATION_TYPE_REQUEST);
+            $notification->setText("Hello World!");
+            $notification->setSenderId($_COOKIE['id']);
+            $notification->setRecieverId($id);
+            $notificationManager->makeNotification($notification);
             header("Location:../public/index.php?page=user&action=profile&id={$id}");
         }
 

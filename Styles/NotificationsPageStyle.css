@@ -1,0 +1,21 @@
+body {
+    padding: 0px;
+    margin:0px;
+    background-color: #BDBDBD;
+}
+.body {
+    width:800px;
+    min-height:100px;
+    margin:auto;
+    margin-top:50px;
+    padding:5px;
+    background-color: #FAFAFA;
+}
+
+.notificationColumn {
+    width:600px;
+    min-heigh:50px;
+    margin:auto;
+    padding:5px;
+    background-color: #2c3e50;
+}
