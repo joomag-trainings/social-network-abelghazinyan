@@ -34,14 +34,14 @@
     <a class="logout" href="index.php?page=authentication&action=logout">EXIT</a>
 
     </div>
+    <?php
+        use \Service\NotificationDrawer;
 
+
+    ?>
 </div>
 <div class="notificationBar" id="notifBar">
-<?php
-    use \Service\NotificationDrawer;
-    NotificationDrawer::drawNotificationBar($_COOKIE['id']);
-
-?>
+    <?php NotificationDrawer::drawNotificationBar($_COOKIE['id']); ?>
     <div class="seeAll">
         <a href="index.php?page=notification&action=show">
             <h6 class="smallText">SEE ALL NOTIFICATIONS</h6>
@@ -49,18 +49,47 @@
     </div>
 </div>
 <script>
+
     button = document.getElementById('notifButton');
     bar = document.getElementById('notifBar');
     bar.style.visibility = 'hidden';
     var show = true;
+
     button.addEventListener('click',function () {
         if (show) {
+           // refreshBar();
             bar.style.visibility = 'visible';
         } else {
             bar.style.visibility = 'hidden';
         }
         show = !show;
     });
+
+    var notifButton = document.getElementsByClassName('notifButton');
+
+    for (i=notifButton.length-1 ; i>=0  ; i--) {
+        if (notifButton[i] != null) {
+            notifButton[i].addEventListener('click',function (e) {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+
+                    }
+                };
+                var id = e.target.getAttribute('name');
+                var type = e.target.getAttribute('id');
+                if (type == 'notifAccept'){
+                    xhttp.open("GET", "../public/index.php?page=user&action=acceptrequest&id=" + id);
+                }
+                if (type == 'notifReject'){
+                    xhttp.open("GET", "../public/index.php?page=user&action=removerequest&id=" + id);
+                }
+                xhttp.send();
+                e.target.parentNode.parentNode.parentNode.removeChild(e.target.parentNode.parentNode);
+            });
+        }
+    }
+
 </script>
 <style>
     body {
@@ -88,6 +117,7 @@
     }
 
     .notificationBar {
+        visibility: hidden;
         position: fixed;
         z-index: 3;
         width:300px;

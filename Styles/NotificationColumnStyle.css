@@ -56,25 +56,7 @@ div.notifAvatarColumn > img {
 
 }
 
-.notifButtonColumn:visited {
-    font-family: "DejaVu Sans";
-    position:absolute;
-    background-color: #3498db;
-    font-size:20px;
-    bottom:4px;
-    left:4px;
-    text-decoration: solid;
-    text-align: center;
-    color:antiquewhite;
-    padding: 4px;
-    width:100px;
-    height: 60px;
-    border:0px;
-    top:56px;
-
-}
-
-.notifButtonColumn:link {
+.notifButtonColumn{
     font-family: "DejaVu Sans";
     position:absolute;
     background-color: #3498db;
@@ -89,13 +71,15 @@ div.notifAvatarColumn > img {
     height: 30px;
     border:0px;
     top:56px;
+    cursor:hand;
 }
+
 
 #notifAcceptColumn {
     left:272px;
 }
 
-#notifRemoveColumn {
+#notifRejectColumn {
     left:386px;
 }
 

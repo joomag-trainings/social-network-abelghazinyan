@@ -33,53 +33,60 @@
 
         public static function drawNotificationColumn($id,$from,$till)
         {
+            $message ='';
             $notifications = NotificationManager::getNotifications($id,$from,$till);
             if ($notifications != null) {
                 foreach ($notifications as $notification) {
                     if ($notification->getType() == Notification::NOTIFICATION_TYPE_REQUEST) {
-                        self::drawFriendRequest($notification,self::NOTIFICATION_SHOW_TYPE_COLUMN);
+                        $message .= self::drawFriendRequest($notification,self::NOTIFICATION_SHOW_TYPE_COLUMN);
                     } else if ($notification->getType() == Notification::NOTIFICATION_TYPE_POST) {
-                        self::drawPost($notification,self::NOTIFICATION_SHOW_TYPE_COLUMN);
+                        $message .= self::drawPost($notification,self::NOTIFICATION_SHOW_TYPE_COLUMN);
                     }
                 }
             }
+            return $message;
         }
 
         private static function drawFriendRequest(Notification $notification,$type)
         {
             $user = new UserModel($notification->getSenderId());
-            echo "<div class='notifBox{$type}'>";
-            echo "<div class='notifAvatar{$type}'>";
-            echo "<img src='../Profile/profile.jpg'>";
-            echo "</div>";
-            echo "<div class='notifAbout{$type}'>";
-            echo "<h6 class='notifTime{$type}'>{$notification->getTime()}</h6>";
-            echo "<h3 class='notifText{$type}'>Sent you Friend Request</h3>";
-            echo "<a href='../public/index.php?page=user&action=profile&id={$user->getId()}'>";
-            echo "<h1 class='notifSender{$type}'>{$user->getFname()} {$user->getLname()}</h1>";
-            echo "</a>";
-            echo "<a class='notifButton{$type}' id='notifAccept{$type}' href='../public/index.php?page=user&action=acceptrequest&id={$user->getId()}'>Accept</a>";
-            echo "    ";
-            echo "<a class='notifButton{$type}' id='notifRemove{$type}' href='../public/index.php?page=user&action=removerequest&id={$user->getId()}'>Remove</a>";
-            echo "</div>";
-            echo "</div>";
+            $message =
+                "<div class='notifBox{$type}' id='request'>".
+                "div class='notifAvatar{$type}'>" .
+                "<img src='../Profile/profile.jpg'>" .
+                "</div>" .
+                "<div class='notifAbout{$type}'>".
+                "<h6 class='notifTime{$type}'>{$notification->getTime()}</h6>" .
+                "<h3 class='notifText{$type}'>Sent you Friend Request</h3>" .
+                "<a href='../public/index.php?page=user&action=profile&id={$user->getId()}'>" .
+                "<h1 class='notifSender{$type}'>{$user->getFname()} {$user->getLname()}</h1>" .
+                "</a>" .
+                "<div class='notifButton{$type}' id='notifAccept{$type}' name='{$notification->getSenderId()}'>Accept</div>" .
+                "    " .
+                "<div class='notifButton{$type}' id='notifReject{$type}' name='{$notification->getSenderId()}'>Reject</div>".
+                "</div>".
+                "</div>";
+                echo $message;
+                return $message;
         }
 
         private static function drawPost(Notification $notification,$type)
         {
             $user = new UserModel($notification->getSenderId());
-            echo "<div class='notifBox{$type}'>";
-            echo "<div class='notifAvatar{$type}'>";
-            echo "<img src='../Profile/profile.jpg'>";
-            echo "</div>";
-            echo "<div class='notifAbout{$type}'>";
-            echo "<h6 class='notifTime{$type}'>{$notification->getTime()}</h6>";
-            echo "<h3 class='notifText{$type}'>{$notification->getText()}</h3>";
-            echo "<a href='../public/index.php?page=user&action=profile&id={$user->getId()}'>";
-            echo "<h1 class='notifSender{$type}'>{$user->getFname()} {$user->getLname()}</h1>";
-            echo "</a>";
-            echo "<a class='notifButton{$type}' id='notifRemove{$type}' href='../public/index.php?page=user&action=removenotification&id={$notification->getId()}'>Remove</a>";
-            echo "</div>";
-            echo "</div>";
+            $message =
+                "<div class='notifBox{$type}'>".
+                "<div class='notifAvatar{$type}'>".
+                "<img src='../Profile/profile.jpg'>".
+                "</div>".
+                "<div class='notifAbout{$type}'>".
+                "<h6 class='notifTime{$type}'>{$notification->getTime()}</h6>".
+                "<h3 class='notifText{$type}'>{$notification->getText()}</h3>".
+                "<a href='../public/index.php?page=user&action=profile&id={$user->getId()}'>".
+                "<h1 class='notifSender{$type}'>{$user->getFname()} {$user->getLname()}</h1>".
+                "</a>".
+                "</div>".
+                "</div>";
+            echo $message;
+            return $message;
         }
     }

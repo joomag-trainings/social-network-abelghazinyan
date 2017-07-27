@@ -8,6 +8,7 @@
 
     namespace Controller;
     use Db\Connection;
+    use Helper\Debug;
     use \Helper\ImageUploader;
     use Model\UserModel;
     use Model\Notification;
@@ -41,7 +42,8 @@
         public function actionRemovenotification($id)
         {
             NotificationManager::removeNotificationById($id);
-            header("Location:../public/index.php?page=user&action=profile&id={$id}");
+        //    header("Location:../public/index.php?page=user&action=profile&id={$id}");
+            return true;
         }
 
         public function actionAcceptrequest($senderId)
@@ -57,7 +59,8 @@
             $notification->setText("Accepted your request");
             NotificationManager::makeNotification($notification);
 
-            header("Location:../public/index.php?page=user&action=profile&id={$id}");
+          //  header("Location:../public/index.php?page=user&action=profile&id={$id}");
+            return true;
         }
 
         public function actionRemoveRequest($senderId)
@@ -73,6 +76,7 @@
             NotificationManager::makeNotification($notification);
 
             header("Location:../public/index.php?page=user&action=profile&id={$id}");
+            return true;
         }
 
         public function actionRequest($id) {

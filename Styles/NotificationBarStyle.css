@@ -56,7 +56,8 @@ div.notifAvatar > img {
 
 }
 
-.notifButton:visited {
+
+.notifButton{
     font-family: "DejaVu Sans";
     position:absolute;
     background-color: #3498db;
@@ -71,31 +72,15 @@ div.notifAvatar > img {
     height: 15px;
     border:0px;
     top:28px;
-
-}
-
-.notifButton:link {
-    font-family: "DejaVu Sans";
-    position:absolute;
-    background-color: #3498db;
-    font-size:10px;
-    bottom:2px;
-    left:2px;
-    text-decoration: solid;
-    text-align: center;
-    color:antiquewhite;
-    padding: 2px;
-    width:50px;
-    height: 15px;
-    border:0px;
-    top:28px;
+    cursor:hand;
 }
 
 #notifAccept {
     left:136px;
 }
 
-#notifRemove {
+#notifReject {
     left:193px;
 }
+
 
