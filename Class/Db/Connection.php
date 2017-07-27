@@ -81,8 +81,8 @@
         {
             $statement=$this->connection->prepare("SELECT * FROM users where id= '{$id}'");
             $statement->execute();
-            $res = $statement->fetchAll(\PDO::FETCH_ASSOC);
-            return $res[0];
+            $res = $statement->fetch(\PDO::FETCH_ASSOC);
+            return $res;
         }
 
         public function getUserId($email)

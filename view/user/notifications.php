@@ -24,7 +24,7 @@
         $notifCount = 6;
         $from = 1;
         NotificationDrawer::drawNotificationColumn($_COOKIE['id'],$from,$notifCount);
-
+    
     ?>
     </div>
 </div>

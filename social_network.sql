@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 26, 2017 at 03:31 PM
+-- Generation Time: Jul 28, 2017 at 02:06 AM
 -- Server version: 5.7.18-0ubuntu0.16.04.1
 -- PHP Version: 7.0.18-0ubuntu0.16.04.1
 
@@ -38,8 +38,24 @@ CREATE TABLE `friendlist` (
 --
 
 INSERT INTO `friendlist` (`id_1`, `id_2`) VALUES
-(11, 1),
-(1, 11);
+(1, 2),
+(2, 1),
+(1, 3),
+(1, 6),
+(1, 7),
+(1, 8),
+(1, 9),
+(1, 10),
+(1, 11),
+(1, 12),
+(1, 13),
+(1, 14),
+(1, 15),
+(1, 16),
+(1, 17),
+(1, 18),
+(1, 19),
+(1, 20);
 
 -- --------------------------------------------------------
 
@@ -61,17 +77,43 @@ CREATE TABLE `notifications` (
 --
 
 INSERT INTO `notifications` (`id`, `id_1`, `id_2`, `time`, `type`, `text`) VALUES
-(12, 1, 2, '2017-07-26 08:44:30', 'request', 'Hello World!'),
-(13, 1, 11, '2017-07-26 09:53:37', 'request', 'Hello World!'),
-(16, 1, 10, '2017-07-26 10:39:54', 'post', 'Testing Notification'),
-(17, 1, 10, '2017-07-26 10:40:05', 'post', 'Testing Notification'),
-(18, 1, 16, '2017-07-26 10:40:14', 'post', 'Testing Notification'),
-(19, 1, 23, '2017-07-26 10:40:23', 'post', 'Testing Notification'),
-(20, 1, 5, '2017-07-26 10:40:31', 'post', 'Testing Notification'),
-(21, 1, 12, '2017-07-26 10:40:38', 'post', 'Testing Notification'),
-(22, 1, 31, '2017-07-26 10:40:45', 'post', 'Testing Notification'),
-(23, 1, 4, '2017-07-26 10:40:51', 'post', 'Testing Notification'),
-(24, 1, 14, '2017-07-26 10:40:59', 'post', 'Testing Notification');
+(39, 38, 1, '2017-07-26 20:54:27', 'post', 'Accepted your request'),
+(40, 38, 1, '2017-07-26 20:54:39', 'post', 'Accepted your request'),
+(41, 38, 1, '2017-07-26 20:55:54', 'post', 'Accepted your request'),
+(42, 38, 1, '2017-07-26 20:55:56', 'post', 'Rejected your request'),
+(43, 38, 1, '2017-07-26 20:56:29', 'post', 'Accepted your request'),
+(45, 44, 1, '2017-07-26 20:58:28', 'post', 'Accepted your request'),
+(46, 44, 1, '2017-07-26 20:59:35', 'post', 'Accepted your request'),
+(47, 44, 1, '2017-07-26 20:59:36', 'post', 'Accepted your request'),
+(48, 44, 1, '2017-07-26 21:00:00', 'post', 'Accepted your request'),
+(49, 44, 1, '2017-07-26 21:00:28', 'post', 'Accepted your request'),
+(50, 44, 1, '2017-07-26 21:01:06', 'post', 'Accepted your request'),
+(51, 44, 1, '2017-07-26 21:03:47', 'post', 'Accepted your request'),
+(52, 44, 1, '2017-07-26 21:05:21', 'post', 'Accepted your request'),
+(53, 44, 1, '2017-07-26 21:05:41', 'post', 'Rejected your request'),
+(54, 44, 1, '2017-07-26 21:05:59', 'post', 'Accepted your request'),
+(57, 8, 1, '2017-07-26 21:20:23', 'post', 'Accepted your request'),
+(93, 1, 8, '2017-07-27 08:54:59', 'post', 'Posted on your wall'),
+(94, 1, 8, '2017-07-27 08:55:03', 'post', 'Posted on your wall'),
+(95, 1, 8, '2017-07-27 08:55:07', 'post', 'Posted on your wall'),
+(102, 10, 1, '2017-07-27 16:58:31', 'post', 'Accepted your request'),
+(103, 9, 1, '2017-07-27 16:58:54', 'post', 'Accepted your request'),
+(104, 8, 1, '2017-07-27 16:59:10', 'post', 'Accepted your request'),
+(107, 1, 10, '2017-07-27 17:01:51', 'post', 'Posted on your wall'),
+(108, 1, 12, '2017-07-27 17:02:07', 'post', 'Posted on your wall'),
+(109, 1, 18, '2017-07-27 17:02:14', 'post', 'Posted on your wall'),
+(110, 1, 7, '2017-07-27 17:02:20', 'post', 'Posted on your wall'),
+(111, 1, 23, '2017-07-27 17:02:29', 'post', 'Posted on your wall'),
+(112, 1, 31, '2017-07-27 17:02:39', 'post', 'Posted on your wall'),
+(113, 1, 2, '2017-07-27 17:02:46', 'post', 'Posted on your wall'),
+(114, 1, 23, '2017-07-27 17:02:53', 'post', 'Posted on your wall'),
+(115, 10, 1, '2017-07-27 17:11:22', 'post', 'Accepted your request'),
+(116, 10, 1, '2017-07-27 17:11:24', 'post', 'Accepted your request'),
+(117, 1, 23, '2017-07-27 19:05:06', 'post', 'Posted on your wall'),
+(118, 1, 23, '2017-07-27 19:05:10', 'post', 'Posted on your wall'),
+(119, 1, 23, '2017-07-27 19:05:13', 'post', 'Posted on your wall'),
+(120, 1, 23, '2017-07-27 19:05:16', 'post', 'Posted on your wall'),
+(121, 1, 23, '2017-07-27 19:05:19', 'post', 'Posted on your wall');
 
 -- --------------------------------------------------------
 
@@ -133,7 +175,8 @@ INSERT INTO `users` (`id`, `email`, `hash`, `fname`, `lname`, `dob`, `gender`, `
 (34, 'asa@shas.as', '$2y$10$IYW/CM1lyfMNW9.CleeJne/UYcy6N/iyMGkQdLdx68jU718ffBHLm', 'Abel', 'Muradyan', '15-10-1916', 1, NULL, NULL, NULL),
 (35, 'asha@shas.as', '$2y$10$KSyX9HIC7UIgpUMlfPuDK.aOq.sNJF/vVNpaxzE2EHeY1.ZA0ZsBe', 'Abel', 'Babayan', '15-12-1916', 1, NULL, NULL, NULL),
 (36, 'ashha@shas.as', '$2y$10$lK9KrvyTIUFCnaJ5OxHkkuZoLzVn6MZt3rGMsc30iWdov3h33aDGu', 'Abel', 'Hovhannisyan', '13-04-1916', 1, NULL, NULL, NULL),
-(37, 'jkdsfkjds@dsd.dsd', '$2y$10$DA5ljuhLzxDIXFZB2wCaueW5hkW6g.gxDi1P/YEf0g56/FoloUi0C', 'Abel', 'Abel', '17-11-1914', 1, NULL, NULL, NULL);
+(37, 'jkdsfkjds@dsd.dsd', '$2y$10$DA5ljuhLzxDIXFZB2wCaueW5hkW6g.gxDi1P/YEf0g56/FoloUi0C', 'Abel', 'Abel', '17-11-1914', 1, NULL, NULL, NULL),
+(38, 'sdfsd@sdfsdf.sfsdf', '$2y$10$/TBuVcIoJlluVU8jt7GkkeQ04GX2BvKbMq4f/oC.nrOB/iIxhBG9S', 'Abel', 'Ginosyan', '17-11-1915', 1, NULL, NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -159,12 +202,12 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=122;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;COMMIT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
