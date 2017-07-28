@@ -7,20 +7,25 @@
         private $imageError;
         private $formName;
         private $target_dir;
+        const IMAGE_PATH = "/var/www/html/social-network/media/";
 
-        public function __construct($formName,$target_dir)
+        public function __construct($formName)
         {
             $this->imageError = '';
             $this->formName = $formName;
-            $this->target_dir = $target_dir;
         }
 
         public function upload()
         {
+            $returnTarget = null;
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                if ($_POST['form'] === $this->formName) {
-                    //$target_dir = "/var/www/html/social-network/Profile/";
-                    $target_file = $this->target_dir . basename($_FILES["file"]["name"]);
+                if ($_POST['form'] === $this->formName && !empty($_FILES["file"]["tmp_name"])) {
+
+                    $image = md5_file($_FILES["file"]["tmp_name"]);
+                    $image = md5(mt_rand().$image);
+                    $folder = $image[0] . $image[1] . "/". $image[2] . $image[3] ."/". $image[4] . $image[5] ."/";
+                    $returnTarget = "/social-network/media/" . $folder . $image . "." . pathinfo($_FILES["file"]["name"], PATHINFO_EXTENSION);
+                    $target_file = self::IMAGE_PATH . $folder . $image . "." . pathinfo($_FILES["file"]["name"], PATHINFO_EXTENSION);
                     $uploadOk = 1;
                     $imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
                     // Check if image file is a actual image or fake image
@@ -54,7 +59,15 @@
                         $this->imageError = "Sorry, your file was not uploaded.";
 
                     } else {
-
+                        if (!file_exists(self::IMAGE_PATH . $image[0] . $image[1])) {
+                            mkdir(self::IMAGE_PATH . $image[0] . $image[1], 0777, true);
+                        }
+                        if (!file_exists(self::IMAGE_PATH . $image[0] . $image[1] . "/". $image[2] . $image[3])) {
+                            mkdir(self::IMAGE_PATH . $image[0] . $image[1] . "/". $image[2] . $image[3] , 0777, true);
+                        }
+                        if (!file_exists(self::IMAGE_PATH . $image[0] . $image[1] . "/". $image[2] . $image[3] ."/". $image[4] . $image[5])) {
+                            mkdir(self::IMAGE_PATH . $image[0] . $image[1] . "/". $image[2] . $image[3] ."/". $image[4] . $image[5] , 0777, true);
+                        }
                         if (!move_uploaded_file($_FILES["file"]["tmp_name"], $target_file)) {
                             $this->imageError = "Sorry, there was an error uploading your file.";
                         }
@@ -62,6 +75,7 @@
                     }
                 }
             }
+            return $returnTarget;
         }
 
         public function getImageError()

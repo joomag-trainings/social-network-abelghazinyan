@@ -25,7 +25,7 @@
                 "<a href='../public/index.php?page=user&action=profile&id={$user->getId()}'>" .
                 "<div class='userBox'>" .
                 "<div class='avatar'>" .
-                "<img src='../Profile/profile.jpg'>" .
+                "<img src='{$user->getAvatarPath()}'>" .
                 "</div>" .
                 "<div class='aboutUser'>" .
                 "<h1>{$user->getFname()} {$user->getLname()}</h1>";
@@ -44,9 +44,8 @@
         }
 
         public function actionGet($id,$page) {
-            $start = ($page - 1) * self::PAGE_SIZE;
+            $start = ($page -1) * self::PAGE_SIZE;
             $offset = self::PAGE_SIZE;
-            $message = '';
             $user = new UserModel($id);
             $friendList = $user->getFriendList();
             if (!empty($friendList)) {
@@ -60,12 +59,11 @@
                     }
                     if (isset($userList)) {
                         foreach ($userList as $userBox) {
-                            $message .= $this->addUserBox($userBox);
+                            $this->addUserBox($userBox);
                         }
                     }
                 }
             }
-            print $message;
         }
 
         public function actionShow($id)
@@ -74,7 +72,7 @@
             $user = new UserModel($id);
             $friendList = $user->getFriendList();
             if (!empty($friendList)) {
-                $friendList = array_slice($friendList, 1, $offset);
+                $friendList = array_slice($friendList, 0, $offset);
                 if (!empty($friendList)) {
                     foreach ($friendList as $friendID) {
                         $list[] = $this->connection->getUserDataById($friendID);

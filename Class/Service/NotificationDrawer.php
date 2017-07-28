@@ -53,7 +53,7 @@
             $message =
                 "<div class='notifBox{$type}' id='request'>".
                 "div class='notifAvatar{$type}'>" .
-                "<img src='../Profile/profile.jpg'>" .
+                "<img src='{$user->getAvatarPath()}'>" .
                 "</div>" .
                 "<div class='notifAbout{$type}'>".
                 "<h6 class='notifTime{$type}'>{$notification->getTime()}</h6>" .
@@ -76,7 +76,7 @@
             $message =
                 "<div class='notifBox{$type}'>".
                 "<div class='notifAvatar{$type}'>".
-                "<img src='../Profile/profile.jpg'>".
+                "<img src='{$user->getAvatarPath()}'>".
                 "</div>".
                 "<div class='notifAbout{$type}'>".
                 "<h6 class='notifTime{$type}'>{$notification->getTime()}</h6>".

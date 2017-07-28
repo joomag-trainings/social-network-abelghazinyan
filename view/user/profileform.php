@@ -16,7 +16,7 @@
 
         <div class="avatarBox">
             <div class="avatar">
-                <img src="../Profile/profile.jpg">
+                <img src="<?php echo $user->getAvatarPath() ?>">
             </div>
             <div class="upload">
                 <form method="post" enctype="multipart/form-data">

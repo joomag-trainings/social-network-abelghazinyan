@@ -15,6 +15,7 @@
     <div class="containerBox">
         <?php
             if (isset($userList)) {
+                echo "<h1>Friends</h1>";
                 foreach ($userList as $userBox) {
                     $this->addUserBox($userBox);
                 }

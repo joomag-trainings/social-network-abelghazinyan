@@ -13,7 +13,7 @@
     <?php require "../view/templates/header.php"?>
     <div class="body">
         <div class="profile">
-            <img src="../Profile/profile.jpg">
+            <img src="<?php echo $user->getAvatarPath() ?>">
         </div>
 
 

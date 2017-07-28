@@ -16,6 +16,8 @@
         private $work;
         private $education;
         private $friendList;
+        private $avatarPath;
+
 
         public function __construct($id)
         {
@@ -31,6 +33,11 @@
             $this->city = $data['city'];
             $this->work = $data['work'];
             $this->education = $data['education'];
+            if ($data['avatar'] == null) {
+                $this->avatarPath = "../media/defaultAvatar.jpg";
+            } else {
+                $this->avatarPath = $data['avatar'];
+            }
             $this->friendList = $db->getFriendList($id);
         }
 
@@ -213,4 +220,21 @@
         {
             $this->education = $education;
         }
+
+        /**
+         * @return mixed
+         */
+        public function getAvatarPath()
+        {
+            return $this->avatarPath;
+        }
+
+        /**
+         * @param mixed $avatarPath
+         */
+        public function setAvatarPath($avatarPath)
+        {
+            $this->avatarPath = $avatarPath;
+        }
+
     }

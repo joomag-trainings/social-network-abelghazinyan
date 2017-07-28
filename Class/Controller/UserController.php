@@ -92,8 +92,13 @@
 
         public function actionForm ($id)
         {
-            $uploader = new ImageUploader('profile',"/var/www/html/social-network/Profile/");
-            $uploader->upload();
+            $uploader = new ImageUploader('profile');
+            $target_dir = $uploader->upload();
+            \Helper\Debug::consoleLog($target_dir);
+            if ($uploader->getImageError() == '' && $target_dir != null) {
+                $this->connection->setUserAvatar($id,$target_dir);
+
+            }
             $user = new UserModel($id);
 
             if ($_SERVER['REQUEST_METHOD']==='POST') {
@@ -145,7 +150,8 @@
                         $this->connection->updateUser($id,$fname,$lname,$dob,$gender,$city,$work,$education);
                         header("Location:index.php?page=user&action=profile&id={$id}");
                     }
-                   // die($id . " " . $fname . " " . $lname . " " . $dob . " " . $gender . " " . $city . " " . $work . " " . $education);
+
+
 
                 }
             }

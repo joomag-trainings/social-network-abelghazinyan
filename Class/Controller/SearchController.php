@@ -24,7 +24,7 @@
                 "<a href='../public/index.php?page=user&action=profile&id={$user->getId()}'>" .
                 "<div class='userBox'>" .
                 "<div class='avatar'>" .
-                "<img src='../Profile/profile.jpg'>" .
+                "<img src='{$user->getAvatarPath()}'>" .
                 "</div>" .
                 "<div class='aboutUser'>" .
                 "<h1>{$user->getFname()} {$user->getLname()}</h1>";
@@ -68,7 +68,6 @@
                     $message .= $this->addUserBox($userBox);
                 }
             }
-            print $message;
         }
 
         public function actionSearch($key,$page)

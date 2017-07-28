@@ -219,4 +219,12 @@
             $res = $statement->fetch(\PDO::FETCH_ASSOC);
             return $res['total'];
         }
+
+        public function setUserAvatar($id, $path)
+        {
+            $statement = $this->connection->prepare(
+                "UPDATE users SET avatar='{$path}' WHERE id='{$id}'"
+            );
+            $statement->execute();
+        }
     }

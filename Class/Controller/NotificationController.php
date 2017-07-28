@@ -17,8 +17,8 @@
 
         public function actionAddcolumn($page) {
             $pageSize = 6;
-            $from = $page*$pageSize;
+            $from = ($page-1)*$pageSize + 1;
             $message = NotificationDrawer::drawNotificationColumn($_COOKIE['id'],$from, $pageSize);
-            print $message;
+
         }
     }
