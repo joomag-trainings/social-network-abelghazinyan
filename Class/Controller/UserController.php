@@ -34,8 +34,34 @@
             require '../view/user/timeline.php';
         }
 
-        public function actionPhotos ()
+        public function actionRemovephoto($userID,$photoID)
         {
+            if ($userID == $_COOKIE['id']) {
+                $this->connection->removePhoto($photoID);
+            }
+            header("Location:../public/index.php?page=user&action=photos&id={$userID}");
+        }
+
+        private function addPhoto($path) {
+            echo
+            "<a href='index.php?page=user&action=removephoto&key={$path['user_id']}&result={$path['id']}'>
+            <div class='pic'>
+            <img src='{$path['path']}'>
+            </div>
+            </a>";
+        }
+
+        public function actionPhotos ($id)
+        {
+            $uploader = new ImageUploader('image');
+            $target_dir = $uploader->upload();
+            if ($uploader->getImageError() == '' && $target_dir != null) {
+                $this->connection->addPhoto($id,$target_dir);
+                header("Location:../public/index.php?page=user&action=photos&id={$id}");
+            }
+            $userId = $id;
+            $user = new UserModel($id);
+            $photos = $user->getPhotos($id);
             require '../view/user/photos.php';
         }
 
@@ -94,10 +120,9 @@
         {
             $uploader = new ImageUploader('profile');
             $target_dir = $uploader->upload();
-            \Helper\Debug::consoleLog($target_dir);
             if ($uploader->getImageError() == '' && $target_dir != null) {
                 $this->connection->setUserAvatar($id,$target_dir);
-
+                header("Location:../public/index.php?page=user&action=form&id={$id}");
             }
             $user = new UserModel($id);
 

@@ -5,20 +5,21 @@ body {
 }
 .body {
     width:1000px;
-    height:800px;
+    height:430px;
     margin:auto;
     margin-top:50px;
     background-color: #FAFAFA;
 }
 
 .profile {
+
+    position: relative;
     height:300px;
     width:300px;
     margin:10px 10px;
     background-color: #ecf0f1;
     border:15px solid #ecf0f1;
     float:left;
-    position: relative;
     overflow: hidden;
 
 }

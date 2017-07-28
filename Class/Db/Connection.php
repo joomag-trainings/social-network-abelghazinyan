@@ -227,4 +227,23 @@
             );
             $statement->execute();
         }
+
+        public function addPhoto($id,$target_dir)
+        {
+            $statement = $this->connection->prepare(
+                "INSERT INTO photos (id, user_id, path)
+                          VALUES (NULL, :id, :path)"
+            );
+            $statement->bindParam('id',$id);
+            $statement->bindParam('path',$target_dir);
+            $statement->execute();
+        }
+
+        public function removePhoto($id)
+        {
+            $statement = $this->connection->prepare(
+                "DELETE FROM photos WHERE id='{$id}'"
+            );
+            $statement->execute();
+        }
     }

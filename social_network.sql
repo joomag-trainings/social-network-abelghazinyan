@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 28, 2017 at 03:10 PM
--- Server version: 5.7.18-0ubuntu0.16.04.1
+-- Generation Time: Jul 28, 2017 at 05:23 PM
+-- Server version: 5.7.19-0ubuntu0.16.04.1
 -- PHP Version: 7.0.18-0ubuntu0.16.04.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -138,6 +138,30 @@ INSERT INTO `notifications` (`id`, `id_1`, `id_2`, `time`, `type`, `text`) VALUE
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `photos`
+--
+
+CREATE TABLE `photos` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `path` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `photos`
+--
+
+INSERT INTO `photos` (`id`, `user_id`, `path`) VALUES
+(6, 1, '/social-network/media/6f/c8/53/6fc8532b41978df81098617fdc279017.jpg'),
+(7, 1, '/social-network/media/bc/35/84/bc358425b4e7569aa17f2a621fd833ec.jpg'),
+(8, 1, '/social-network/media/52/67/3a/52673a41cc662f5e85b5c786df5aad80.jpg'),
+(9, 1, '/social-network/media/d9/7a/b0/d97ab0e9361b8db5be78267d3079658a.jpg'),
+(10, 1, '/social-network/media/72/e0/4b/72e04bfc527825b9f55243512ba7d17f.jpg'),
+(11, 2, '/social-network/media/f7/39/b8/f739b82227e561cfa13885fe0a7cedea.jpg');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -210,6 +234,12 @@ ALTER TABLE `notifications`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `photos`
+--
+ALTER TABLE `photos`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -224,6 +254,11 @@ ALTER TABLE `users`
 --
 ALTER TABLE `notifications`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=122;
+--
+-- AUTO_INCREMENT for table `photos`
+--
+ALTER TABLE `photos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `users`
 --

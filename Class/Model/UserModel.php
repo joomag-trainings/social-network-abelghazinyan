@@ -18,7 +18,6 @@
         private $friendList;
         private $avatarPath;
 
-
         public function __construct($id)
         {
             $this->id = $id;
@@ -50,6 +49,16 @@
             $dob[1] = $monthName;
             $dob[2] = $this->dob[2];
             return $dob;
+        }
+
+        public function getPhotos()
+        {
+            $connection = Connection::getInstance()->getConnection();
+            $statement=$connection->prepare("SELECT * FROM photos where user_id= '{$this->id}'");
+            $statement->execute();
+            $res = $statement->fetchAll(\PDO::FETCH_ASSOC);
+
+            return $res;
         }
 
         /**

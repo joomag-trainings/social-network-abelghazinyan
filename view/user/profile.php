@@ -91,7 +91,7 @@
             ?>
         </div>
         <div class="buttons">
-            <a class="edit" href="index.php?page=user&action=photos">Photos</a>
+            <a class="edit" href="index.php?page=user&action=photos&id=<?php echo $user->getId() ?>">Photos</a>
             <a class="edit" href="index.php?page=friend&action=show&id=<?php echo $user->getId() ?>">Friends</a>
         </div>
     </div>
