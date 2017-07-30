@@ -6,7 +6,6 @@
     {
         private $imageError;
         private $formName;
-        private $target_dir;
         const IMAGE_PATH = "/var/www/html/social-network/media/";
 
         public function __construct($formName)
@@ -43,7 +42,7 @@
                         $uploadOk = 0;
                     }
 
-                    if ($_FILES["file"]["size"] > 500000) {
+                    if ($_FILES["file"]["size"] > 2000000) {
                         $this->imageError = "Sorry, your file is too large.";
                         $uploadOk = 0;
                     }

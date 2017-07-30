@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 28, 2017 at 05:23 PM
+-- Generation Time: Jul 30, 2017 at 09:37 PM
 -- Server version: 5.7.19-0ubuntu0.16.04.1
 -- PHP Version: 7.0.18-0ubuntu0.16.04.1
 
@@ -162,6 +162,35 @@ INSERT INTO `photos` (`id`, `user_id`, `path`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `posts`
+--
+
+CREATE TABLE `posts` (
+  `id` int(11) NOT NULL,
+  `posterId` int(11) NOT NULL,
+  `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `text` text,
+  `path` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `posts`
+--
+
+INSERT INTO `posts` (`id`, `posterId`, `time`, `text`, `path`) VALUES
+(1, 2, '2017-07-30 16:12:35', 'Minimalism...', '/social-network/media/f7/39/b8/f739b82227e561cfa13885fe0a7cedea.jpg'),
+(2, 1, '2017-07-30 16:49:24', 'Barev dzez', NULL),
+(3, 1, '2017-07-30 16:49:47', 'Material Design Rocks!!!!', NULL),
+(5, 1, '2017-07-30 17:00:44', '', '/social-network/media/5d/0d/3c/5d0d3ca1f29d1e055d758c1c0fe51d7d.jpg'),
+(6, 1, '2017-07-30 17:01:46', ' Testing posts  Testing posts  Testing posts  Testing posts  Testing posts  Testing posts  Testing posts  Testing posts  Testing posts  Testing posts  Testing posts  Testing posts ', NULL),
+(16, 1, '2017-07-30 17:04:57', '', '/social-network/media/98/79/65/98796500dfb278d8d0bf3e6b153d2481.jpg'),
+(17, 1, '2017-07-30 17:06:53', '', '/social-network/media/15/fa/88/15fa8899704a12d0bf30615166d58eb3.jpg'),
+(18, 2, '2017-07-30 17:27:40', 'Abel is heroo!!)', NULL),
+(19, 11, '2017-07-30 17:28:12', 'Testing posts in this social network!!!', '/social-network/media/9b/4a/84/9b4a8460006e64c1ab8e02ac28503580.jpg');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -228,6 +257,13 @@ INSERT INTO `users` (`id`, `email`, `hash`, `fname`, `lname`, `dob`, `gender`, `
 --
 
 --
+-- Indexes for table `friendlist`
+--
+ALTER TABLE `friendlist`
+  ADD KEY `id_1` (`id_1`),
+  ADD KEY `id_2` (`id_2`);
+
+--
 -- Indexes for table `notifications`
 --
 ALTER TABLE `notifications`
@@ -237,7 +273,15 @@ ALTER TABLE `notifications`
 -- Indexes for table `photos`
 --
 ALTER TABLE `photos`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `ownerId` (`user_id`);
+
+--
+-- Indexes for table `posts`
+--
+ALTER TABLE `posts`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `posterId` (`posterId`);
 
 --
 -- Indexes for table `users`
@@ -260,10 +304,38 @@ ALTER TABLE `notifications`
 ALTER TABLE `photos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
+-- AUTO_INCREMENT for table `posts`
+--
+ALTER TABLE `posts`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;COMMIT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `friendlist`
+--
+ALTER TABLE `friendlist`
+  ADD CONSTRAINT `id_1` FOREIGN KEY (`id_1`) REFERENCES `users` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `id_2` FOREIGN KEY (`id_2`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `photos`
+--
+ALTER TABLE `photos`
+  ADD CONSTRAINT `ownerId` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `posts`
+--
+ALTER TABLE `posts`
+  ADD CONSTRAINT `posterId` FOREIGN KEY (`posterId`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -9,6 +9,8 @@ body {
     margin:auto;
     margin-top:50px;
     background-color: #FAFAFA;
+    box-shadow: 0 10px 10px -6px gray;
+
 }
 
 .profile {

@@ -125,7 +125,7 @@
         left:800px;
         padding:5px;
         background-color: #2c3e50;
-        box-shadow: -5px 10px 5px gray;
+        box-shadow: 0 10px 10px -6px gray;
     }
 
     .seeAll {

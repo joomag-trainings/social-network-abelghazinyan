@@ -10,6 +10,8 @@ body {
     margin-top:50px;
     padding: 5px;
     background-color: #FAFAFA;
+    box-shadow: 0 10px 10px -6px gray;
+
 }
 
 .userBox {

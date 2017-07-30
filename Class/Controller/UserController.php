@@ -13,10 +13,14 @@
     use Model\UserModel;
     use Model\Notification;
     use Service\NotificationManager;
+    use Model\Post;
+    use Service\PostManager;
+    use Service\PostDrawer;
 
     class UserController
     {
         private $connection;
+        const TIMELINE_UPDATE_SIZE = 1;
 
         public function __construct()
         {
@@ -29,8 +33,37 @@
             require '../view/user/profile.php';
         }
 
-        public function actionTimeline ()
+        public function actionUpdatetimeline($page)
         {
+            $start = ($page - 1) * (self::TIMELINE_UPDATE_SIZE) + PostDrawer::POST_COUNT;
+            $offset = self::TIMELINE_UPDATE_SIZE;
+            $message = PostDrawer::drawTimeline($start, $offset);
+            return $message;
+        }
+        public function actionTimeline()
+        {
+            if ($_SERVER['REQUEST_METHOD']==='POST') {
+                if ($_POST['form'] == 'post') {
+                    $text = $_POST['text'];
+                    $uploader = new ImageUploader('post');
+                    $target_dir = $uploader->upload();
+                    \Helper\Debug::consoleLog($uploader->getImageError());
+                    if ($uploader->getImageError() == '' && $target_dir != null) {
+                        $path = $target_dir;
+                    } else {
+                        $path = null;
+                    }
+
+                    $post = new Post();
+                    $post->setImagePath($path);
+                    $post->setPosterId($_COOKIE['id']);
+                    $post->setText($text);
+                    if ($text != null || $path != null) {
+                        PostManager::makePost($post);
+                    }
+                    header("Location:../public/index.php?page=user&action=timeline&id={$_COOKIE['id']}");
+                }
+            }
             require '../view/user/timeline.php';
         }
 
