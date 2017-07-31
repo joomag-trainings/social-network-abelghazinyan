@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 30, 2017 at 09:37 PM
+-- Generation Time: Jul 31, 2017 at 04:10 PM
 -- Server version: 5.7.19-0ubuntu0.16.04.1
 -- PHP Version: 7.0.18-0ubuntu0.16.04.1
 
@@ -75,7 +75,9 @@ INSERT INTO `friendlist` (`id_1`, `id_2`) VALUES
 (17, 1),
 (18, 1),
 (19, 1),
-(20, 1);
+(20, 1),
+(1, 39),
+(39, 1);
 
 -- --------------------------------------------------------
 
@@ -133,7 +135,9 @@ INSERT INTO `notifications` (`id`, `id_1`, `id_2`, `time`, `type`, `text`) VALUE
 (118, 1, 23, '2017-07-27 19:05:10', 'post', 'Posted on your wall'),
 (119, 1, 23, '2017-07-27 19:05:13', 'post', 'Posted on your wall'),
 (120, 1, 23, '2017-07-27 19:05:16', 'post', 'Posted on your wall'),
-(121, 1, 23, '2017-07-27 19:05:19', 'post', 'Posted on your wall');
+(121, 1, 23, '2017-07-27 19:05:19', 'post', 'Posted on your wall'),
+(122, 23, 1, '2017-07-31 07:29:16', 'request', 'Hello World!'),
+(124, 39, 1, '2017-07-31 10:11:09', 'post', 'Accepted your request');
 
 -- --------------------------------------------------------
 
@@ -153,11 +157,11 @@ CREATE TABLE `photos` (
 
 INSERT INTO `photos` (`id`, `user_id`, `path`) VALUES
 (6, 1, '/social-network/media/6f/c8/53/6fc8532b41978df81098617fdc279017.jpg'),
-(7, 1, '/social-network/media/bc/35/84/bc358425b4e7569aa17f2a621fd833ec.jpg'),
 (8, 1, '/social-network/media/52/67/3a/52673a41cc662f5e85b5c786df5aad80.jpg'),
 (9, 1, '/social-network/media/d9/7a/b0/d97ab0e9361b8db5be78267d3079658a.jpg'),
 (10, 1, '/social-network/media/72/e0/4b/72e04bfc527825b9f55243512ba7d17f.jpg'),
-(11, 2, '/social-network/media/f7/39/b8/f739b82227e561cfa13885fe0a7cedea.jpg');
+(11, 2, '/social-network/media/f7/39/b8/f739b82227e561cfa13885fe0a7cedea.jpg'),
+(12, 1, '/social-network/media/6f/25/dd/6f25ddc537019e27ae81602371fb61df.jpg');
 
 -- --------------------------------------------------------
 
@@ -186,7 +190,9 @@ INSERT INTO `posts` (`id`, `posterId`, `time`, `text`, `path`) VALUES
 (16, 1, '2017-07-30 17:04:57', '', '/social-network/media/98/79/65/98796500dfb278d8d0bf3e6b153d2481.jpg'),
 (17, 1, '2017-07-30 17:06:53', '', '/social-network/media/15/fa/88/15fa8899704a12d0bf30615166d58eb3.jpg'),
 (18, 2, '2017-07-30 17:27:40', 'Abel is heroo!!)', NULL),
-(19, 11, '2017-07-30 17:28:12', 'Testing posts in this social network!!!', '/social-network/media/9b/4a/84/9b4a8460006e64c1ab8e02ac28503580.jpg');
+(19, 11, '2017-07-30 17:28:12', 'Testing posts in this social network!!!', '/social-network/media/9b/4a/84/9b4a8460006e64c1ab8e02ac28503580.jpg'),
+(20, 1, '2017-07-31 10:50:07', 'Abel', '/social-network/media/55/cc/82/55cc825f0a6d5ff5a12dda6a2df6d752.jpg'),
+(21, 1, '2017-07-31 10:51:19', 'Abel', '/social-network/media/13/d6/1b/13d61b743d7874efd33132e19b735571.jpg');
 
 -- --------------------------------------------------------
 
@@ -213,7 +219,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `hash`, `fname`, `lname`, `dob`, `gender`, `city`, `work`, `education`, `avatar`) VALUES
-(1, 'ghazinyan.abel@gmail.com', '$2y$10$hnQ6zolHytgY2sejAVGGiOSqsa9jkupyqiN8YiFcH5Bb4xGYLM0AO', 'Abel', 'Ghazinyan', '15-09-1992', 1, 'Yerevan/Armenia', '', 'Moscow State University', '/social-network/media/c8/e0/e9/c8e0e908c1246ece86f565366b4d446c.jpg'),
+(1, 'ghazinyan.abel@gmail.com', '$2y$10$hnQ6zolHytgY2sejAVGGiOSqsa9jkupyqiN8YiFcH5Bb4xGYLM0AO', 'Abel', 'Ghazinyan', '17-11-1917', 1, 'Yerevan/Armenia', 'Joomag Armenia', 'Moscow State University', '/social-network/media/22/8f/eb/228febb56627b6ddff81896b90ca142d.jpg'),
 (2, 'artak@mail.ru', '$2y$10$sgPRJKgK8JjUlgORVJ7YauEnx21hWwpKUIwdXsbpERz7XqaYiGV5q', 'Artak', 'Melkonyan', '14-10-2004', 1, 'Yerevan', '', 'MSU', '/social-network/media/cd/d7/f1/cdd7f1d1d30d76e7b5e4b924903b8649.jpg'),
 (3, 'smith@noah.ruj', '$2y$10$Oq1YybGYj4O8Kd3QaWlEM.pz3NvmxC3VvEpWlergu4okqMCd1Ny3G', 'Noah', 'Smith', '18-12-1917', 1, NULL, NULL, NULL, NULL),
 (4, 'liam@john.eur', '$2y$10$csX2UwT/TY0T01w9QB/pwuU8ByoCoZxUjwN2Td4rut.J3H/tLta7C', 'Liam', 'Johnson', '13-11-1907', 1, NULL, NULL, NULL, NULL),
@@ -250,7 +256,8 @@ INSERT INTO `users` (`id`, `email`, `hash`, `fname`, `lname`, `dob`, `gender`, `
 (35, 'asha@shas.as', '$2y$10$KSyX9HIC7UIgpUMlfPuDK.aOq.sNJF/vVNpaxzE2EHeY1.ZA0ZsBe', 'Abel', 'Babayan', '15-12-1916', 1, NULL, NULL, NULL, NULL),
 (36, 'ashha@shas.as', '$2y$10$lK9KrvyTIUFCnaJ5OxHkkuZoLzVn6MZt3rGMsc30iWdov3h33aDGu', 'Abel', 'Hovhannisyan', '13-04-1916', 1, NULL, NULL, NULL, NULL),
 (37, 'jkdsfkjds@dsd.dsd', '$2y$10$DA5ljuhLzxDIXFZB2wCaueW5hkW6g.gxDi1P/YEf0g56/FoloUi0C', 'Abel', 'Abel', '17-11-1914', 1, NULL, NULL, NULL, NULL),
-(38, 'sdfsd@sdfsdf.sfsdf', '$2y$10$/TBuVcIoJlluVU8jt7GkkeQ04GX2BvKbMq4f/oC.nrOB/iIxhBG9S', 'Abel', 'Ginosyan', '17-11-1915', 1, NULL, NULL, NULL, NULL);
+(38, 'sdfsd@sdfsdf.sfsdf', '$2y$10$/TBuVcIoJlluVU8jt7GkkeQ04GX2BvKbMq4f/oC.nrOB/iIxhBG9S', 'Abel', 'Ginosyan', '17-11-1915', 1, NULL, NULL, NULL, NULL),
+(39, 'torosik@gmail.com', '$2y$10$QeCFQBmPYZLmcjRfTAhp0.zLUUC5yW8jUoTmd3HW8alB0K0gOCXZq', 'Babken', 'Torosyan', '17-11-1917', 1, NULL, NULL, NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -297,7 +304,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=122;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=125;
 --
 -- AUTO_INCREMENT for table `photos`
 --
@@ -307,12 +314,12 @@ ALTER TABLE `photos`
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 --
 -- Constraints for dumped tables
 --

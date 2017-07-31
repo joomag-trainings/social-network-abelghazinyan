@@ -1,18 +1,10 @@
-<?php
-    if ($_SERVER['REQUEST_METHOD']=='POST') {
-        if(isset($_POST['search' ])) {
-            if ($_POST['search'] != NULL) {
-                $key = $_POST['search'];
-                $url = "../public/index.php?page=search&action=search&key={$key}&result=1";
-                header("Location:" . $url);
-            }
-        }
-    }
 
-?>
 <link rel = "stylesheet"
       type = "text/css"
-      href = "../Styles/NotificationBarStyle.css" />
+      href = "../../Styles/NotificationBarStyle.css" />
+<link rel = "stylesheet"
+      type = "text/css"
+      href = "../../Styles/HeaderStyle.css" />
 <div class="header">
     <div class="block">
         <div class="search">
@@ -22,28 +14,26 @@
         </div>
 
     <div class="nav">
-        <a href="index.php?page=user&action=timeline"><div class="navButton"><img src="../Assets/nav/home.png"></div></a>
-        <div class="navButton"><img src="../Assets/nav/message.png"></div>
-        <div id='notifButton' class="navButton"><img src="../Assets/nav/notification.png"></div>
+        <a href="http://localhost/social-network/public/index.php/timeline"><div class="navButton"><img src="../../Assets/nav/home.png"></div></a>
+        <div class="navButton"><img src="../../Assets/nav/message.png"></div>
+        <div id='notifButton' class="navButton"><img src="../../Assets/nav/notification.png"></div>
         <?php
             $id = $_COOKIE['id'];
-            echo "<a href='index.php?page=user&action=profile&id={$id}'>";
+            echo "<a href='http://localhost/social-network/public/index.php/profile={$id}'>";
         ?>
-        <div class="navButton"><img src="../Assets/nav/profile.png"></div></a>
+        <div class="navButton"><img src="../../Assets/nav/profile.png"></div></a>
     </div>
-    <a class="logout" href="index.php?page=authentication&action=logout">EXIT</a>
+    <a class="logout" href="http://localhost/social-network/public/index.php/logout">EXIT</a>
 
     </div>
     <?php
         use \Service\NotificationDrawer;
-
-
     ?>
 </div>
 <div class="notificationBar" id="notifBar">
     <?php NotificationDrawer::drawNotificationBar($_COOKIE['id']); ?>
     <div class="seeAll">
-        <a href="index.php?page=notification&action=show">
+        <a href="http://localhost/social-network/public/index.php/notifications">
             <h6 class="smallText">SEE ALL NOTIFICATIONS</h6>
         </a>
     </div>
@@ -79,10 +69,10 @@
                 var id = e.target.getAttribute('name');
                 var type = e.target.getAttribute('id');
                 if (type == 'notifAccept'){
-                    xhttp.open("GET", "../public/index.php?page=user&action=acceptrequest&id=" + id);
+                    xhttp.open("GET", "http://localhost/social-network/public/index.php/accept_request=" + id);
                 }
                 if (type == 'notifReject'){
-                    xhttp.open("GET", "../public/index.php?page=user&action=removerequest&id=" + id);
+                    xhttp.open("GET", "http://localhost/social-network/public/index.php/remove_request=" + id);
                 }
                 xhttp.send();
                 e.target.parentNode.parentNode.parentNode.removeChild(e.target.parentNode.parentNode);

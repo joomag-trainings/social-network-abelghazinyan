@@ -1,0 +1,49 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+    <link rel = "stylesheet"
+          type = "text/css"
+          href = "../../Styles/FriendsPageStyle.css" />
+</head>
+<body>
+<?php require "../view/templates/header.php"?>
+<div class="body">
+    <div class="containerBox">
+        <?php
+            if (isset($userList)) {
+                echo "<h1>Friends</h1>";
+                foreach ($userList as $userBox) {
+                    $class->addUserBox($userBox);
+                }
+            } else {
+                echo "<h1>No friends</h1>";
+            }
+        ?>
+    </div>
+</div>
+
+</body>
+</html>
+<script>
+
+    var container = document.getElementsByClassName('containerBox');
+    var page = 1;
+    window.onscroll = function(ev) {
+        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    container[0].innerHTML += this.responseText;
+                }
+            };
+            var string = window.location.href.split("friends=");
+            var id = string[1];
+            page++;
+            xhttp.open("GET", "http://localhost/social-network/public/index.php/friends="+ id +"&result=" + page);
+            xhttp.send();
+
+        }
+    };
+</script>
+

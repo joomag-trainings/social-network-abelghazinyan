@@ -1,0 +1,47 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+    <link rel = "stylesheet"
+          type = "text/css"
+          href = "../../Styles/SearchStyle.css" />
+</head>
+<body>
+    <?php require "../view/templates/header.php"?>
+<div class="body">
+        <div class="containerBox">
+            <?php
+                if (isset($userList)) {
+                    foreach ($userList as $userBox) {
+                        $class->addUserBox($userBox);
+                    }
+                } else {
+                    echo "<h1>No results</h1>";
+                }
+            ?>
+        </div>
+</div>
+
+</body>
+</html>
+<script>
+
+    var container = document.getElementsByClassName('containerBox');
+    var page = 1;
+    window.onscroll = function(ev) {
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                container[0].innerHTML += this.responseText;
+            }
+        };
+        page++;
+        var string = window.location.href.split("search=");
+        key = string[1];
+        xhttp.open("GET", "http://localhost/social-network/public/index.php/search=" + key + "&result=" + page);
+        xhttp.send();
+
+        }
+    };
+</script>
