@@ -1,12 +1,28 @@
 <?php
 
 namespace Controller;
+use Slim\Http\Request;
+use Slim\Http\Response;
 
-class ErrorController
+class ErrorController extends AbstractController
 {
-    public function actionNotFound()
+    public function __construct($container)
     {
-        http_response_code(404);
-        require '../view/error/404.php';
+        parent::__construct($container);
+    }
+
+    public function actionNotFound(Request $request, Response $response, $args)
+    {
+
+        $viewRenderer = $this->container->get('view');
+
+        $response = $viewRenderer->render(
+            $response,
+            "/error/404.php",
+            [
+            ]
+        );
+
+        return $response;
     }
 }

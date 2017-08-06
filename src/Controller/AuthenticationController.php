@@ -38,13 +38,13 @@
         {
             if ($this->checkIfRemembered()) {
                 $id = $_COOKIE['id'];
-                header("Location:http://localhost/social-network/public/index.php/profile={$id}");
+                header("Location:/social-network/public/index.php/profile={$id}");
                 exit;
             } elseif ($this->readInputs($request)) {
                 if ($this->verifyUser($request)) {
                     $this->actionLogin();
                     $id = $this->dataBase->getUserId($this->emailSignIn);
-                    header("Location:http://localhost/social-network/public/index.php/profile={$id}");
+                    header("Location:/social-network/public/index.php/profile={$id}");
                     exit;
                 }
             }
@@ -122,7 +122,7 @@
         {
             unset($_COOKIE['id']);
             setcookie('id', null, 1);
-            header("Location:http://localhost/social-network/public/index.php/");
+            header("Location:http:/social-network/public/index.php/");
             exit;
         }
 

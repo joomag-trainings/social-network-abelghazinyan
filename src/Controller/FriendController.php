@@ -42,7 +42,7 @@
             $notification->setText("Accepted your request");
             NotificationManager::makeNotification($notification);
 
-            header("Location:http://localhost/social-network/public/index.php/profile={$id}");
+            header("Location:/social-network/public/index.php/profile={$id}");
             exit;
         }
 
@@ -72,7 +72,7 @@
             $notification->setSenderId($_COOKIE['id']);
             $notification->setRecieverId($id);
             $notificationManager->makeNotification($notification);
-            header("Location:http://localhost/social-network/public/index.php/profile={$id}");
+            header("Location:/social-network/public/index.php/profile={$id}");
             exit;
         }
 
@@ -129,6 +129,12 @@
         public function actionShow(Request $request, Response $response, $args)
         {
             $id = $args['id'];
+
+            if ($this->connection->getUserDataById($id) == null) {
+                $uri = "social-network/public/index.php/error";
+                return $response = $response->withRedirect($uri);
+            }
+
             $offset = self::PAGE_SIZE;
             $user = new UserModel($id);
             $friendList = $user->getFriendList();

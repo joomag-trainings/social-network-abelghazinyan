@@ -175,15 +175,15 @@
 
         public function deleteFriend($id_1,$id_2)
         {
-            $statement=$this->connection->prepare("DELETE FROM friendlist where id_1='{$id_1}' AND id_2='{$id_2}' ");
+            $statement=$this->connection->prepare("DELETE FROM friendships where id_1='{$id_1}' AND id_2='{$id_2}' ");
             $statement->execute();
-            $statement=$this->connection->prepare("DELETE FROM friendlist where id_1='{$id_2}' AND id_2='{$id_1}' ");
+            $statement=$this->connection->prepare("DELETE FROM friendships where id_1='{$id_2}' AND id_2='{$id_1}' ");
             $statement->execute();
         }
 
         public function getFriendList($id)
         {
-            $statement=$this->connection->prepare("SELECT * FROM friendlist where id_1='{$id}'");
+            $statement=$this->connection->prepare("SELECT * FROM friendships where id_1='{$id}'");
             $statement->execute();
             $res = $statement->fetchAll(\PDO::FETCH_ASSOC);
             $list = null;
@@ -196,7 +196,7 @@
         public function checkIfFriend($id)
         {
             $id1 = $_COOKIE['id'];
-            $statement=$this->connection->prepare("SELECT * FROM friendlist where id_1='{$id1}' AND id_2='{$id}'");
+            $statement=$this->connection->prepare("SELECT * FROM friendships where id_1='{$id1}' AND id_2='{$id}'");
             $statement->execute();
             $res = $statement->fetchAll(\PDO::FETCH_ASSOC);
             if (!empty($res)) {

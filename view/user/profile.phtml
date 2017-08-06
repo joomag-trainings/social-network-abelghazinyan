@@ -70,9 +70,9 @@
             <?php
 
                 if ($_COOKIE['id'] == $user->getId()) {
-                    echo "<a class='edit' href='http://localhost/social-network/public/index.php/edit_profile={$_COOKIE['id']}'>Edit Profile</a>";
+                    echo "<a class='edit' href='/social-network/public/index.php/edit_profile={$_COOKIE['id']}'>Edit Profile</a>";
                 } else if (!\Service\NotificationManager::checkIfRequestSent($user->getId()) && !$connection->checkIfFriend($user->getId())) {
-                    echo "<a class='edit' href='http://localhost/social-network/public/index.php/send_request={$user->getId()}'>Send Request</a>";
+                    echo "<a class='edit' href='/social-network/public/index.php/send_request={$user->getId()}'>Send Request</a>";
                 }
                 if (\Service\NotificationManager::checkIfRequestSent($user->getId()) && !$connection->checkIfFriend($user->getId())){
                     echo "<a class='edit' href=''>Request Sent</a>";
@@ -83,8 +83,8 @@
             ?>
         </div>
         <div class="buttons">
-            <a class="edit" href="http://localhost/social-network/public/index.php/photos=<?php echo $user->getId() ?>">Photos</a>
-            <a class="edit" href="http://localhost/social-network/public/index.php/friends=<?php echo $user->getId() ?>">Friends</a>
+            <a class="edit" href="/social-network/public/index.php/photos=<?php echo $user->getId() ?>">Photos</a>
+            <a class="edit" href="/social-network/public/index.php/friends=<?php echo $user->getId() ?>">Friends</a>
         </div>
     </div>
 

@@ -56,7 +56,7 @@
                 "<div class='notifAbout{$type}'>".
                 "<h6 class='notifTime{$type}'>{$notification->getTime()}</h6>" .
                 "<h3 class='notifText{$type}'>Sent you Friend Request</h3>" .
-                "<a href='http://localhost/social-network/public/index.php/profile={$user->getId()}'>" .
+                "<a href='/social-network/public/index.php/profile={$user->getId()}'>" .
                 "<h1 class='notifSender{$type}'>{$user->getFname()} {$user->getLname()}</h1>" .
                 "</a>" .
                 "<div class='notifButton{$type}' id='notifAccept{$type}' name='{$notification->getSenderId()}'>Accept</div>" .
@@ -78,7 +78,7 @@
                 "<div class='notifAbout{$type}'>".
                 "<h6 class='notifTime{$type}'>{$notification->getTime()}</h6>".
                 "<h3 class='notifText{$type}'>{$notification->getText()}</h3>".
-                "<a href='http://localhost/social-network/public/index.php/profile={$user->getId()}'>".
+                "<a href='/social-network/public/index.php/profile={$user->getId()}'>".
                 "<h1 class='notifSender{$type}'>{$user->getFname()} {$user->getLname()}</h1>".
                 "</a>".
                 "</div>".

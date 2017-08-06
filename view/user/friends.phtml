@@ -40,7 +40,7 @@
             var string = window.location.href.split("friends=");
             var id = string[1];
             page++;
-            xhttp.open("GET", "http://localhost/social-network/public/index.php/friends="+ id +"&result=" + page);
+            xhttp.open("GET", "/social-network/public/index.php/friends="+ id +"&result=" + page);
             xhttp.send();
 
         }

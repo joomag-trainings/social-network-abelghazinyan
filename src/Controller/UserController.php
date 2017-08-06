@@ -35,6 +35,12 @@
         public function actionProfile (Request $request, Response $response, $args)
         {
             $id = $args['id'];
+
+            if ($this->connection->getUserDataById($id) == null) {
+                $uri = "social-network/public/index.php/error";
+                return $response = $response->withRedirect($uri);
+            }
+
             $user = new UserModel($id);
 
             $viewRenderer = $this->container->get('view');
@@ -63,7 +69,6 @@
 
         public function actionTimeline(Request $request, Response $response, $args)
         {
-            $this->actionSearch($request,$response,$args);
 
             if ($request->getParam('form') == 'post') {
                 $text = $request->getParam('text');
@@ -83,7 +88,7 @@
                 if ($text != null || $path != null) {
                     PostManager::makePost($post);
                 }
-                header("Location:http://localhost/social-network/public/index.php/timeline");
+                header("Location:/social-network/public/index.php/timeline");
                 exit;
             }
 
@@ -104,17 +109,16 @@
         {
             $userID = $args['id'];
             $photoID = $args['photo_id'];
-            \Helper\Debug::consoleLog("araaaaa");
             if ($userID == $_COOKIE['id']) {
                 $this->connection->removePhoto($photoID);
             }
-            header("Location:http://localhost/social-network/public/index.php/photos={$userID}");
+            header("Location:/social-network/public/index.php/photos={$userID}");
             exit;
         }
 
         public function addPhoto($photo) {
             echo
-            "<a href='http://localhost/social-network/public/index.php/photos={$photo['user_id']}&remove={$photo['id']}'>
+            "<a href='/social-network/public/index.php/photos={$photo['user_id']}&remove={$photo['id']}'>
             <div class='pic'>
             <img src='{$photo['path']}'>
             </div>
@@ -123,14 +127,19 @@
 
         public function actionPhotos (Request $request, Response $response, $args)
         {
-            $this->actionSearch($request,$response,$args);
 
             $id = $args['id'];
+
+            if ($this->connection->getUserDataById($id) == null) {
+                $uri = "social-network/public/index.php/error";
+                return $response = $response->withRedirect($uri);
+            }
+
             $uploader = new ImageUploader('image',$request);
             $target_dir = $uploader->upload();
             if ($uploader->getImageError() == '' && $target_dir != null) {
                 $this->connection->addPhoto($id,$target_dir);
-                header("Location:http://localhost/social-network/public/index.php/photos={$id}");
+                header("Location:/social-network/public/index.php/photos={$id}");
                 exit;
             }
             $userId = $id;
@@ -156,14 +165,19 @@
 
         public function actionForm (Request $request, Response $response, $args)
         {
-            $this->actionSearch($request,$response,$args);
 
             $id = $args['id'];
+
+            if ($this->connection->getUserDataById($id) == null) {
+                $uri = "social-network/public/index.php/error";
+                return $response = $response->withRedirect($uri);
+            }
+
             $uploader = new ImageUploader('profile',$request);
             $target_dir = $uploader->upload();
             if ($uploader->getImageError() == '' && $target_dir != null) {
                 $this->connection->setUserAvatar($id,$target_dir);
-                header("Location:http://localhost/social-network/public/index.php/edit_profile={$id}");
+                header("Location:/social-network/public/index.php/edit_profile={$id}");
                 exit;
             }
             $user = new UserModel($id);
@@ -217,7 +231,7 @@
                 $id = $_COOKIE['id'];
                 if ($error == '') {
                     $this->connection->updateUser($id,$fname,$lname,$dob,$gender,$city,$work,$education);
-                    header("Location:http://localhost/social-network/public/index.php/profile={$id}");
+                    header("Location:/social-network/public/index.php/profile={$id}");
                     exit;
                 }
 

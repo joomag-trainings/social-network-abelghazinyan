@@ -16,7 +16,7 @@
             $text = $post->getText();
             $imagePath = $post->getImagePath();
             $statement = $connection->prepare(
-                "INSERT INTO posts (id, posterId, time, text, path)
+                "INSERT INTO posts (id, user_id, time, text, path)
                           VALUES (NULL, :posterId, now(), :text, :path)"
             );
             $statement->bindParam('posterId',$posterId);
@@ -38,7 +38,7 @@
             $connection = Connection::getInstance()->getConnection();
             $from--;
             $string = implode(",",$list);
-            $statement=$connection->prepare("SELECT * FROM posts WHERE posterId IN ({$string}) ORDER BY time DESC LIMIT {$till} OFFSET {$from}");
+            $statement=$connection->prepare("SELECT * FROM posts WHERE user_id IN ({$string}) ORDER BY time DESC LIMIT {$till} OFFSET {$from}");
             $statement->execute();
             $res = $statement->fetchAll(\PDO::FETCH_ASSOC);
 
@@ -46,7 +46,7 @@
             foreach ($res as $ntf) {
                 $post = new Post();
                 $post->setId($ntf['id']);
-                $post->setPosterId($ntf['posterId']);
+                $post->setPosterId($ntf['user_id']);
                 $post->setText($ntf['text']);
                 $post->setTime($ntf['time']);
                 $post->setImagePath($ntf['path']);

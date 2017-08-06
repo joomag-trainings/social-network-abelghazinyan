@@ -24,16 +24,4 @@
             $this->container = $container;
         }
 
-        public function actionSearch(Request $request, Response $response, $args)
-        {
-            $search = $request->getParam('search');
-            if(isset($search)) {
-                if ($search != NULL) {
-                    $key = $search;
-                    $url = "http://localhost/social-network/public/index.php/search={$key}";
-                    header("Location:" . $url);
-                    exit;
-                }
-            }
-        }
     }

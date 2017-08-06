@@ -8,22 +8,22 @@
 <div class="header">
     <div class="block">
         <div class="search">
-            <form method="post">
-                <input class="searchinput" name="search" type="text" placeholder="SEARCH">
+            <form method="get" action="/social-network/public/index.php/search" >
+                <input class="searchinput" name="key" type="text" placeholder="SEARCH">
             </form>
         </div>
 
     <div class="nav">
-        <a href="http://localhost/social-network/public/index.php/timeline"><div class="navButton"><img src="../../Assets/nav/home.png"></div></a>
+        <a href="/social-network/public/index.php/timeline"><div class="navButton"><img src="../../Assets/nav/home.png"></div></a>
         <div class="navButton"><img src="../../Assets/nav/message.png"></div>
         <div id='notifButton' class="navButton"><img src="../../Assets/nav/notification.png"></div>
         <?php
             $id = $_COOKIE['id'];
-            echo "<a href='http://localhost/social-network/public/index.php/profile={$id}'>";
+            echo "<a href='/social-network/public/index.php/profile={$id}'>";
         ?>
         <div class="navButton"><img src="../../Assets/nav/profile.png"></div></a>
     </div>
-    <a class="logout" href="http://localhost/social-network/public/index.php/logout">EXIT</a>
+    <a class="logout" href="/social-network/public/index.php/logout">EXIT</a>
 
     </div>
     <?php
@@ -33,7 +33,7 @@
 <div class="notificationBar" id="notifBar">
     <?php NotificationDrawer::drawNotificationBar($_COOKIE['id']); ?>
     <div class="seeAll">
-        <a href="http://localhost/social-network/public/index.php/notifications">
+        <a href="/social-network/public/index.php/notifications">
             <h6 class="smallText">SEE ALL NOTIFICATIONS</h6>
         </a>
     </div>
@@ -69,10 +69,10 @@
                 var id = e.target.getAttribute('name');
                 var type = e.target.getAttribute('id');
                 if (type == 'notifAccept'){
-                    xhttp.open("GET", "http://localhost/social-network/public/index.php/accept_request=" + id);
+                    xhttp.open("GET", "/social-network/public/index.php/accept_request=" + id);
                 }
                 if (type == 'notifReject'){
-                    xhttp.open("GET", "http://localhost/social-network/public/index.php/remove_request=" + id);
+                    xhttp.open("GET", "/social-network/public/index.php/remove_request=" + id);
                 }
                 xhttp.send();
                 e.target.parentNode.parentNode.parentNode.removeChild(e.target.parentNode.parentNode);

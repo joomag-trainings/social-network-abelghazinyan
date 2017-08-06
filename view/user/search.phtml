@@ -37,9 +37,9 @@
             }
         };
         page++;
-        var string = window.location.href.split("search=");
+        var string = window.location.href.split("search?key=");
         key = string[1];
-        xhttp.open("GET", "http://localhost/social-network/public/index.php/search=" + key + "&result=" + page);
+        xhttp.open("GET", "/social-network/public/index.php/search=" + key + "&result=" + page);
         xhttp.send();
 
         }

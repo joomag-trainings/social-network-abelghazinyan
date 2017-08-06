@@ -40,7 +40,7 @@
                 }
             };
             page++;
-            xhttp.open("GET", "http://localhost/social-network/public/index.php/notifications=" + page);
+            xhttp.open("GET", "/social-network/public/index.php/notifications=" + page);
             xhttp.send();
 
         }
@@ -55,10 +55,10 @@
                 var id = e.target.getAttribute('name');
                 var type = e.target.getAttribute('id');
                 if (type == 'notifAcceptColumn'){
-                    xhttp.open("GET", "http://localhost/social-network/public/index.php/accept_request=" + id);
+                    xhttp.open("GET", "/social-network/public/index.php/accept_request=" + id);
                 }
                 if (type == 'notifRejectColumn'){
-                     xhttp.open("GET", "http://localhost/social-network/public/index.php/remove_request=" + id);
+                     xhttp.open("GET", "/social-network/public/index.php/remove_request=" + id);
                 }
                 xhttp.send();
                 e.target.parentNode.parentNode.parentNode.removeChild(e.target.parentNode.parentNode);
